@@ -1,7 +1,10 @@
-from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
-from .forms import SignUpForm
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect, get_object_or_404
+from django.utils import timezone
+
+from .forms import SignUpForm, TaskForm
+from .models import Task
 
 
 # Create your views here.
@@ -22,4 +25,42 @@ def signup(request):
 
 @login_required(login_url='login/')
 def home(request):
-    return render(request, 'tasks/home_page.html')
+    # tasks = Task.objects.all
+    user = request.user
+    tasks = Task.objects.filter(user=user).order_by('time_published')
+    # write here logic for filter tasks, should be ony shown current logged user tasks
+    return render(request, 'tasks/home_page.html', {'tasks': tasks})
+
+
+def create_task(request):
+    if request.method == 'POST':
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            task = form.save(commit=False)
+            task.user = request.user
+            task.time_published = timezone.now()
+            task.save()
+            return render(request, 'tasks/home_page.html', pk=task.pk)
+    else:
+        form = TaskForm()
+    return render(request, 'tasks/edit_task.html', {'form': form})
+
+
+def task_detail(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    return render(request, 'tasks/task_detail.html', {'task': task})
+
+
+def edit_task(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    if request.method == 'POST':
+        form = TaskForm(request.POST, instance=task)
+        if form.is_valid():
+            task = form.save(commit=False)
+            task.user = request.user
+            task.time_published = timezone.now()
+            task.save()
+            return redirect('tasks/task_detail.html', pk=task.pk)
+    else:
+        form = TaskForm(instance=task)
+    return render(request, 'tasks/edit_task.html', {'form': form})

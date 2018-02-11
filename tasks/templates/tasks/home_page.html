@@ -1,4 +1,13 @@
 {% extends 'tasks/base.html' %}
 {% block body %}
 <p>You are logged into tasks board application</p>
+{% for task in tasks %}
+    <div class="task">
+        <div class="date">
+            <p>published: {{ task.time_published }}</p>
+        </div>
+        <h1><a href="{% url 'task_detail' pk=task.pk %}">{{ task.task_title }}</a></h1>
+        <p>{{ task.task_description|linebreaksbr }}</p>
+    </div>
+{% endfor %}
 {% endblock%}
