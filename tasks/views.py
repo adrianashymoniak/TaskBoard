@@ -7,7 +7,6 @@ from .forms import SignUpForm, TaskForm
 from .models import Task
 
 
-# Create your views here.
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -25,10 +24,8 @@ def signup(request):
 
 @login_required(login_url='login/')
 def home(request):
-    # tasks = Task.objects.all
     user = request.user
     tasks = Task.objects.filter(user=user).order_by('time_published')
-    # write here logic for filter tasks, should be ony shown current logged user tasks
     return render(request, 'tasks/home_page.html', {'tasks': tasks})
 
 
@@ -40,10 +37,10 @@ def create_task(request):
             task.user = request.user
             task.time_published = timezone.now()
             task.save()
-            return render(request, 'tasks/home_page.html', pk=task.pk)
+            return redirect('task_detail', pk=task.pk)
     else:
         form = TaskForm()
-    return render(request, 'tasks/edit_task.html', {'form': form})
+        return render(request, 'tasks/edit_task.html', {'form': form})
 
 
 def task_detail(request, pk):
@@ -58,9 +55,9 @@ def edit_task(request, pk):
         if form.is_valid():
             task = form.save(commit=False)
             task.user = request.user
-            task.time_published = timezone.now()
+            task.time_edited = timezone.now()
             task.save()
-            return redirect('tasks/task_detail.html', pk=task.pk)
+            return redirect('task_detail', pk=task.pk)
     else:
         form = TaskForm(instance=task)
-    return render(request, 'tasks/edit_task.html', {'form': form})
+        return render(request, 'tasks/edit_task.html', {'form': form})
