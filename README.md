@@ -16,3 +16,4 @@
 * **python manage.py makemigrations**
 * Run server locally: **python manage.py runserver**
 * Open browser and go to  **http://127.0.0.1:8000/** -> click signup and create your own user
+* Run tests with **python -m unittest discover e2etests** (chrome should be installed)
