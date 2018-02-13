@@ -8,9 +8,11 @@
     <header>
         {% if user.is_authenticated %}
                 <a href="{% url 'logout' %}">logout</a>
-                <p id="greeting">Hello {{user.username}}</p><hr>
+                <p id="greeting">Hello {{user.username}}</p>
+                <a href="{% url 'create_task' %}">Create task</a>
+                <hr>
         {% else %}
-                <a href="{% url 'login' %}">login</a> / <a href="{% url 'signup' %}">signup</a>
+                <a href="{% url 'signup' %}">signup</a>
         {% endif %}
     </header>
     {% if user.is_anonymous %}
