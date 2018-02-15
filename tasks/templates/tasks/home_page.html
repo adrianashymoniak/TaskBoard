@@ -7,7 +7,8 @@
         <a href="{% url 'edit_task' pk=task.pk %}">(Edit task)</a>
         <p>{{ task.task_description }}</p>
          <div class="date">
-            <p>published: {{ task.time_published }}</p></br>
+             <p>published: {{ task.time_published }}</p></br>
+             <p>estimated: {{ task.time_estimated }}</p></br>
         </div>
     </div>
 

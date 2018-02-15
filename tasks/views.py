@@ -30,7 +30,7 @@ def home(request):
 
 
 def create_task(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = TaskForm(request.POST)
         if form.is_valid():
             task = form.save(commit=False)
@@ -40,7 +40,7 @@ def create_task(request):
             return redirect('task_detail', pk=task.pk)
     else:
         form = TaskForm()
-        return render(request, 'tasks/edit_task.html', {'form': form})
+        return render(request, 'tasks/create_task.html', {'form': form})
 
 
 def task_detail(request, pk):
@@ -50,7 +50,7 @@ def task_detail(request, pk):
 
 def edit_task(request, pk):
     task = get_object_or_404(Task, pk=pk)
-    if request.method == 'POST':
+    if request.method == "POST":
         form = TaskForm(request.POST, instance=task)
         if form.is_valid():
             task = form.save(commit=False)
@@ -59,5 +59,4 @@ def edit_task(request, pk):
             task.save()
             return redirect('task_detail', pk=task.pk)
     else:
-        form = TaskForm(instance=task)
-        return render(request, 'tasks/edit_task.html', {'form': form})
+        return render(request, 'tasks/edit_task.html', {'task': task})
