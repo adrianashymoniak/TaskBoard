@@ -1,4 +1,5 @@
 {% extends 'tasks/base.html' %}
+{% block title%}You are editing task: {{ task.task_title }} {% endblock %}
 {% block body %}
 <form method="post">
     {% csrf_token %}
@@ -9,8 +10,13 @@
     <textarea id="task_description" name="task_description">{{ task.task_description }}</textarea>
     <br><br>
     <label for="time_estimated">Time estimated:</label>
-    <input id="time_estimated" type="date" name="time_estimated" value="{{ task.time_estimated|date:'Y-m-d'}}" >
+    <input id="time_estimated" type="date" name="time_estimated" value="{{ task.time_estimated|date:'Y-m-d'}}">
     <br><br>
     <button type="submit">Edit task</button>
+    <br><br>
+    <a href="{% url 'delete' pk=task.pk %}">Delete task</a>
+    <br>
+    <br>
+    <a href="{% url 'task_detail' pk=task.pk %}"> << Go back to 'Task detail' page </a>
 </form>
 {% endblock %}

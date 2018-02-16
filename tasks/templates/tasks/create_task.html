@@ -3,14 +3,18 @@
 <form method="post">
     {% csrf_token %}
     <label for="task_title">Task title: </label>
-    <input id="task_title" type="text" name="task_title" maxlength="150" required />
+    <input id="task_title" type="text" name="task_title" maxlength="150" required/>
     <br><br>
     <label for="task_description">Task description:</label>
     <textarea id="task_description" name="task_description" required></textarea>
     <br><br>
     <label for="time_estimated">Time estimated:</label>
-    <input id="time_estimated" type="date" name="time_estimated" >
+    <input id="time_estimated" type="date" name="time_estimated">
     <br><br>
     <button type="submit">Create task</button>
+    <br>
+    <button type="reset">Reset</button>
+    <br>
+    <a href="{% url 'home' %}">Cancel</a><br>
 </form>
 {% endblock %}

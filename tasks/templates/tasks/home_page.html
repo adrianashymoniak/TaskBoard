@@ -2,15 +2,14 @@
 {% block title %}Tasks List{% endblock %}
 {% block body %}
 {% for task in tasks %}
-    <div class="task">
-        <h1><a href="{% url 'task_detail' pk=task.pk %}">{{ task.task_title }}</a></h1>
-        <a href="{% url 'edit_task' pk=task.pk %}">(Edit task)</a>
-        <p>{{ task.task_description }}</p>
-         <div class="date">
-             <p>published: {{ task.time_published }}</p></br>
-             <p>estimated: {{ task.time_estimated }}</p></br>
-        </div>
+<div class="task">
+    <h1><a href="{% url 'task_detail' pk=task.pk %}">{{ task.task_title }}</a></h1>
+    <p>{{ task.task_description }}</p>
+    <div class="date">
+        {% if task.time_estimated != Blank %}
+            <p>estimated: {{ task.time_estimated }}</p></br>
+        {% endif %}
     </div>
-
+</div>
 {% endfor %}
 {% endblock%}

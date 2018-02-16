@@ -60,3 +60,14 @@ def edit_task(request, pk):
             return redirect('task_detail', pk=task.pk)
     else:
         return render(request, 'tasks/edit_task.html', {'task': task})
+
+
+def delete_task(request, pk):
+    task = Task.objects.get(pk=pk)
+    task.delete()
+    return redirect('home')
+
+
+def delete_all(request):
+    Task.objects.all().delete()
+    return redirect('home')
