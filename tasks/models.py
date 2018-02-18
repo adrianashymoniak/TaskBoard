@@ -1,7 +1,6 @@
 from datetime import datetime
 
 from django.db import models
-from django.utils import timezone
 
 
 # Create your models here.
@@ -14,10 +13,5 @@ class Task(models.Model):
     time_published = models.DateTimeField(default=datetime.now, blank=True)
     time_edited = models.DateTimeField(null=True, blank=True)
 
-    def published(self):
-        self.time_published = timezone.now()
-        self.save()
-
     def __str__(self):
         return self.task_title, self.task_description
-

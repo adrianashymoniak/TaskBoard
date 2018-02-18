@@ -3,7 +3,7 @@
 {% block body %}
 {% for task in tasks %}
 <div class="task">
-    <h1><a href="{% url 'task_detail' pk=task.pk %}">{{ task.task_title }}</a></h1>
+    <h1><a id="task_title" href="{% url 'task_detail' pk=task.pk %}">{{ task.task_title }}</a></h1>
     <p>{{ task.task_description }}</p>
     <div class="date">
         {% if task.time_estimated != Blank %}

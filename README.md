@@ -17,6 +17,8 @@
 * Run server locally: **python manage.py runserver**
 * Open browser and go to  **http://127.0.0.1:8000/** -> click signup and create your own user
 
+#####Please set url to your server and full path to your database in configs.py
+ 
 #####End to end tests
 * Run command **pip install git+https://github.com/yashaka/selene.git** for installing Selene framework
 * Run tests with **python -m unittest discover e2etests** (chrome should be installed)
