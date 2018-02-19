@@ -1,6 +1,8 @@
 from selene import browser
+from selene.support import by
 
 from e2etests.pages.create_task_page import CreateTaskPage
+from e2etests.pages.task_detail_page import TaskDetailPage
 
 
 class HomePage:
@@ -10,3 +12,7 @@ class HomePage:
     def create_task(self):
         browser.element('#create_task').click()
         return CreateTaskPage()
+
+    def open_task(self, task):
+        browser.element(by.xpath("//a[text()='{}']".format(task.title))).click()
+        return TaskDetailPage()

@@ -17,7 +17,7 @@
         <p id="edited_at">Edited at: {{ task.time_edited }}</p>
     </div>
     {% endif %}
-    <a href="{% url 'edit_task' pk=task.pk %}">Edit task</a>
+    <a id="edit_task_task_detail" href="{% url 'edit_task' pk=task.pk %}">Edit task</a>
     <br>
     <br>
     <a href="{% url 'delete' pk=task.pk %}">Delete task</a>

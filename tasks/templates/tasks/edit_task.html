@@ -12,7 +12,7 @@
     <label for="time_estimated">Time estimated:</label>
     <input id="time_estimated" type="date" name="time_estimated" value="{{ task.time_estimated|date:'Y-m-d'}}">
     <br><br>
-    <button type="submit">Edit task</button>
+    <button id="edit_task" type="submit">Edit task</button>
     <br><br>
     <a href="{% url 'delete' pk=task.pk %}">Delete task</a>
     <br>

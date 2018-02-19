@@ -12,6 +12,16 @@ class SQLHelper:
         return connection
 
     @staticmethod
+    def get_user_id(user):
+        connection = SQLHelper.create_connection()
+        with connection:
+            get_user_sql = ''' SELECT id FROM auth_user WHERE username = ? '''
+            cursor = connection.cursor()
+            cursor.execute(get_user_sql, (user.username,))
+            user_id = cursor.fetchone()[0]
+            return user_id
+
+    @staticmethod
     def create_user(user):
         connection = SQLHelper.create_connection()
         with connection:
@@ -31,3 +41,13 @@ class SQLHelper:
             cursor.execute(find_user_sql, (user.username,))
             if len(cursor.fetchall()) == 0:
                 SQLHelper.create_user(user)
+
+    @staticmethod
+    def create_task(task):
+        connection = SQLHelper.create_connection()
+        with connection:
+            create_task_sql = ''' INSERT INTO tasks_task(task_title, task_description, time_published, time_edited, user_id, time_estimated)
+            VALUES(?, ?, ?, '', ?, ?)'''
+            cursor = connection.cursor()
+            cursor.execute(create_task_sql,
+                           (task.title, task.description, task.published, task.user_id, task.estimated))
