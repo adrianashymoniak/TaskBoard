@@ -1,7 +1,6 @@
 from datetime import datetime, date
 from unittest import TestCase
 
-from selene import browser
 from selene import config
 from selene.browsers import BrowserName
 
@@ -15,9 +14,6 @@ class BaseTest(TestCase):
     def setUp(self):
         config.browser_name = BrowserName.CHROME
         config.base_url = BASE_URL
-
-    def tearDown(self):
-        browser.close()
 
     user = None
     user_id = None

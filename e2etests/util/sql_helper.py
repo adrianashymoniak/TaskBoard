@@ -51,3 +51,11 @@ class SQLHelper:
             cursor = connection.cursor()
             cursor.execute(create_task_sql,
                            (task.title, task.description, task.published, task.user_id, task.estimated))
+
+    @staticmethod
+    def delete_user(user):
+        connection = SQLHelper.create_connection()
+        with connection:
+            delete_user_sql = ''' DELETE FROM auth_user WHERE username = ? '''
+            cursor = connection.cursor()
+            cursor.execute(delete_user_sql, (user.username,))
