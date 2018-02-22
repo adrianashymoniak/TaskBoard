@@ -26,3 +26,8 @@ class TaskDetailPage:
             'p.m.', 'PM')
         task.edited = datetime.strptime(edited, '%b. %d, %Y, %I:%M %p')
         return task
+
+    def delete_task(self):
+        browser.element('#delete_task').click()
+        from e2etests.pages.home_page import HomePage
+        return HomePage()

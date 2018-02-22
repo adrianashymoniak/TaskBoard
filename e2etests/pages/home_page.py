@@ -16,3 +16,6 @@ class HomePage:
     def open_task(self, task):
         browser.element(by.xpath("//a[text()='{}']".format(task.title))).click()
         return TaskDetailPage()
+
+    def get_tasks_titles(self):
+        return [e.text for e in browser.elements('#task_title')]

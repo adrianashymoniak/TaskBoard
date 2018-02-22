@@ -1,6 +1,7 @@
 from datetime import datetime, date
 from unittest import TestCase
 
+from selene import browser
 from selene import config
 from selene.browsers import BrowserName
 
@@ -31,8 +32,11 @@ class BaseTest(TestCase):
         return BaseTest.user_id
 
     def get_test_task(self):
-        task = Task((str(datetime.now().replace(second=0, microsecond=0)) + ' Task title'), 'task description',
+        task = Task((str(datetime.now()) + ' Task title'), 'task description',
                     date.today(), datetime.utcnow().replace(second=0, microsecond=0),
                     user_id=SQLHelper.get_user_id(self.get_user()))
         SQLHelper.create_task(task)
         return task
+
+    def tearDown(self):
+        browser.close()

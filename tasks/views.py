@@ -69,5 +69,5 @@ def delete_task(request, pk):
 
 
 def delete_all(request):
-    Task.objects.all().delete()
+    Task.objects.filter(user_id=request.user).delete()
     return redirect('home')
