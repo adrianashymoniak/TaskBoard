@@ -11,7 +11,7 @@ class UserCanCreateTask(BaseTest):
                              datetime.now().replace(second=0, microsecond=0))
         actual_task = (LoginPage
                        .open()
-                       .login_as(self.get_user())
+                       .login_as(self.get_first_test_user())
                        .create_task()
                        .save_task(expected_task)
                        .read_task())

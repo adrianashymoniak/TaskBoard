@@ -4,12 +4,13 @@ from e2etests.tests.test_base import BaseTest
 
 class UserCanDeleteTask(BaseTest):
     def test_user_can_delete_task(self):
-        task_for_deleting = self.get_test_task()
-        additional_task = self.get_test_task()
+        user = self.get_first_test_user()
+        task_for_deleting = self.get_test_task(user)
+        additional_task = self.get_test_task(user)
 
         available_tasks = (LoginPage
                            .open()
-                           .login_as(self.get_user())
+                           .login_as(user)
                            .open_task(task_for_deleting)
                            .delete_task()
                            .get_tasks_titles())

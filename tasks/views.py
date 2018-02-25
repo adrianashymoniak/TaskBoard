@@ -63,8 +63,7 @@ def edit_task(request, pk):
 
 
 def delete_task(request, pk):
-    task = Task.objects.get(pk=pk)
-    task.delete()
+    Task.objects.get(pk=pk).delete()
     return redirect('home')
 
 

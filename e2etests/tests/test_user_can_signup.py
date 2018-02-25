@@ -1,7 +1,5 @@
 from datetime import datetime
 
-from selene.conditions import text
-
 from e2etests.domain.user import User
 from e2etests.pages.signup_page import SignUpPage
 from e2etests.tests.test_base import BaseTest
@@ -18,11 +16,11 @@ class UserCanSignup(BaseTest):
                                              password_confirm='admin123')
 
     def test_user_can_signup(self):
-        (SignUpPage
-         .open()
-         .signup_as(UserCanSignup.user_signing_up)
-         .greeting()
-         .assure(text(UserCanSignup.user_signing_up.username)))
+        greeting = (SignUpPage
+                    .open()
+                    .signup_as(UserCanSignup.user_signing_up)
+                    .read_greeting())
+        self.assertIn(UserCanSignup.user_signing_up.username, greeting, 'Greeting does not contain username')
 
     def tearDown(self):
         SQLHelper.delete_user(UserCanSignup.user_signing_up)

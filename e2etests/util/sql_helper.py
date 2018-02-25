@@ -31,16 +31,20 @@ class SQLHelper:
                 VALUES(?,0,?,'','admin@test.com',0,1,'','') '''
             cursor = connection.cursor()
             cursor.execute(create_user_sql, (PBKDF2PasswordHasher().encode(user.password, 'salt'), user.username))
+            return cursor.lastrowid
 
     @staticmethod
     def create_user_if_not_present(user):
         connection = SQLHelper.create_connection()
         with connection:
-            find_user_sql = ''' SELECT username FROM auth_user WHERE username = ? '''
+            find_user_sql = ''' SELECT id FROM auth_user WHERE username = ? '''
             cursor = connection.cursor()
             cursor.execute(find_user_sql, (user.username,))
-            if len(cursor.fetchall()) == 0:
+            ids = cursor.fetchall()
+            if len(ids) == 0:
                 SQLHelper.create_user(user)
+            else:
+                return ids[0][0]
 
     @staticmethod
     def create_task(task):

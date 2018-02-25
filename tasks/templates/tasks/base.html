@@ -7,7 +7,7 @@
 <body>
     <header>
         {% if user.is_authenticated %}
-                <a href="{% url 'logout' %}">logout</a>
+                <a id="logout" href="{% url 'logout' %}">logout</a>
                 <p id="greeting">Hello {{user.username}}</p>
                 <a id="create_task" href="{% url 'create_task' %}">Create task</a> <br>
                 <a id="delete_all_tasks" href="{% url 'delete_all' %}">Delete tasks</a>

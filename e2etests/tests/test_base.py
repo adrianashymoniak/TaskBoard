@@ -16,25 +16,27 @@ class BaseTest(TestCase):
         config.browser_name = BrowserName.CHROME
         config.base_url = BASE_URL
 
-    user = None
-    user_id = None
+    first_test_user = None
+    second_test_user = None
 
-    def get_user(self):
-        if BaseTest.user is None:
+    def get_first_test_user(self):
+        if BaseTest.first_test_user is None:
             user = User('admin', 'qazwsx123456')
-            SQLHelper.create_user_if_not_present(user)
-            BaseTest.user = user
-        return BaseTest.user
+            user.user_id = SQLHelper.create_user_if_not_present(user)
+            BaseTest.first_test_user = user
+        return BaseTest.first_test_user
 
-    def get_user_id(self):
-        if BaseTest.user_id is None:
-            BaseTest.user_id = SQLHelper.get_user_id(self.get_user())
-        return BaseTest.user_id
+    def get_second_test_user(self):
+        if BaseTest.second_test_user is None:
+            user = User('admin2', 'qazwsx123456')
+            user.user_id = SQLHelper.create_user_if_not_present(user)
+            BaseTest.second_test_user = user
+        return BaseTest.second_test_user
 
-    def get_test_task(self):
+    def get_test_task(self, user):
         task = Task((str(datetime.now()) + ' Task title'), 'task description',
                     date.today(), datetime.utcnow().replace(second=0, microsecond=0),
-                    user_id=SQLHelper.get_user_id(self.get_user()))
+                    user_id=user.user_id)
         SQLHelper.create_task(task)
         return task
 

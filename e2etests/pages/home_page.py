@@ -6,8 +6,8 @@ from e2etests.pages.task_detail_page import TaskDetailPage
 
 
 class HomePage:
-    def greeting(self):
-        return browser.element('#greeting')
+    def read_greeting(self):
+        return browser.element('#greeting').text
 
     def create_task(self):
         browser.element('#create_task').click()
@@ -19,3 +19,12 @@ class HomePage:
 
     def get_tasks_titles(self):
         return [e.text for e in browser.elements('#task_title')]
+
+    def delete_all(self):
+        browser.element('#delete_all_tasks').click()
+        return self
+
+    def logout(self):
+        browser.element('#logout').click()
+        from e2etests.pages.login_page import LoginPage
+        return LoginPage()
