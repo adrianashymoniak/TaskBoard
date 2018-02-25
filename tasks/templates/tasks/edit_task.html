@@ -14,9 +14,9 @@
     <br><br>
     <button id="edit_task" type="submit">Edit task</button>
     <br><br>
-    <a href="{% url 'delete' pk=task.pk %}">Delete task</a>
+    <a id="delete_task_edit_page" href="{% url 'delete' pk=task.pk %}">Delete task</a>
     <br>
     <br>
-    <a href="{% url 'task_detail' pk=task.pk %}"> << Go back to 'Task detail' page </a>
+    <a id="go_detail_page" href="{% url 'task_detail' pk=task.pk %}"> << Go back to 'Task detail' page </a>
 </form>
 {% endblock %}

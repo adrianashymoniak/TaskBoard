@@ -21,14 +21,14 @@ class BaseTest(TestCase):
 
     def get_first_test_user(self):
         if BaseTest.first_test_user is None:
-            user = User('admin', 'qazwsx123456')
+            user = User('first_test_user', 'admin123')
             user.user_id = SQLHelper.create_user_if_not_present(user)
             BaseTest.first_test_user = user
         return BaseTest.first_test_user
 
     def get_second_test_user(self):
         if BaseTest.second_test_user is None:
-            user = User('admin2', 'qazwsx123456')
+            user = User('second_test_user', 'admin123')
             user.user_id = SQLHelper.create_user_if_not_present(user)
             BaseTest.second_test_user = user
         return BaseTest.second_test_user
@@ -41,4 +41,6 @@ class BaseTest(TestCase):
         return task
 
     def tearDown(self):
+        SQLHelper.delete_tasks_for_user(self.get_first_test_user())
+        SQLHelper.delete_tasks_for_user(self.get_second_test_user())
         browser.close()

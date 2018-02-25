@@ -42,7 +42,7 @@ class SQLHelper:
             cursor.execute(find_user_sql, (user.username,))
             ids = cursor.fetchall()
             if len(ids) == 0:
-                SQLHelper.create_user(user)
+                return SQLHelper.create_user(user)
             else:
                 return ids[0][0]
 
@@ -63,3 +63,12 @@ class SQLHelper:
             delete_user_sql = ''' DELETE FROM auth_user WHERE username = ? '''
             cursor = connection.cursor()
             cursor.execute(delete_user_sql, (user.username,))
+
+    @staticmethod
+    def delete_tasks_for_user(user):
+        connection = SQLHelper.create_connection()
+        with connection:
+            delete_task_sql = ''' DELETE FROM tasks_task WHERE user_id = ? '''
+            cursor = connection.cursor()
+            cursor.execute(delete_task_sql, (user.user_id,))
+

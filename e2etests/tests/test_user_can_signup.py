@@ -7,20 +7,18 @@ from e2etests.util.sql_helper import SQLHelper
 
 
 class UserCanSignup(BaseTest):
-    user_signing_up = None
-
     def setUp(self):
         super(UserCanSignup, self).setUp()
-        UserCanSignup.user_signing_up = User((datetime.utcnow().strftime("%m-%d-%Y_%H.%M_%S") + '_adminaccount'),
-                                             'admin123', email='testemail@email.com',
-                                             password_confirm='admin123')
+        self.user_signing_up = User((datetime.utcnow().strftime("%m-%d-%Y_%H.%M_%S") + '_adminaccount'),
+                                    'admin123', email='testemail@email.com',
+                                    password_confirm='admin123')
 
     def test_user_can_signup(self):
         greeting = (SignUpPage
                     .open()
-                    .signup_as(UserCanSignup.user_signing_up)
+                    .signup_as(self.user_signing_up)
                     .read_greeting())
-        self.assertIn(UserCanSignup.user_signing_up.username, greeting, 'Greeting does not contain username')
+        self.assertIn(self.user_signing_up.username, greeting, 'Greeting does not contain username')
 
     def tearDown(self):
-        SQLHelper.delete_user(UserCanSignup.user_signing_up)
+        SQLHelper.delete_user(self.user_signing_up)

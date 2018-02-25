@@ -31,3 +31,11 @@ class TaskDetailPage:
         browser.element('#delete_task').click()
         from e2etests.pages.home_page import HomePage
         return HomePage()
+
+    def get_tasks_titles(self):
+        return [e.text for e in browser.elements('#task_title_detail')]
+
+    def navigate_to_home_page(self):
+        browser.element('#home_page').click()
+        from e2etests.pages.home_page import HomePage
+        return HomePage()
