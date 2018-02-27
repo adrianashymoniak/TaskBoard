@@ -4,8 +4,11 @@ from unittest import TestCase
 from selene import browser
 from selene import config
 from selene.browsers import BrowserName
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
 
-from e2etests.configs import BASE_URL
+from e2etests.configs import BASE_URL, HEADLESS
 from e2etests.domain.task import Task
 from e2etests.domain.user import User
 from e2etests.util.sql_helper import SQLHelper
@@ -15,6 +18,10 @@ class BaseTest(TestCase):
     def setUp(self):
         config.browser_name = BrowserName.CHROME
         config.base_url = BASE_URL
+        chrome_options = Options()
+        if HEADLESS:
+            chrome_options.add_argument("--headless")
+        browser.set_driver(webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options))
 
     first_test_user = None
     second_test_user = None
