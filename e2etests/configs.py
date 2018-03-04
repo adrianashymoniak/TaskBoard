@@ -1,3 +1,6 @@
 BASE_URL = ''
-DB_PATH = ''
+DB_SETUP = {'database': '',
+            'user': '',
+            'password': '',
+            'host': ''}
 HEADLESS = False

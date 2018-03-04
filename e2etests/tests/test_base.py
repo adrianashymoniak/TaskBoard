@@ -42,7 +42,7 @@ class BaseTest(TestCase):
 
     def get_test_task(self, user):
         task = Task((str(datetime.now()) + ' Task title'), 'task description',
-                    date.today(), datetime.utcnow().replace(second=0, microsecond=0),
+                    date.today(), datetime.now().replace(second=0, microsecond=0),
                     user_id=user.user_id)
         SQLHelper.create_task(task)
         return task

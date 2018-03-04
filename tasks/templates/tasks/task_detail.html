@@ -5,16 +5,16 @@
     <h1 id="task_title_detail">{{ task.task_title }}</h1>
     <p id="task_description">{{ task.task_description|linebreaksbr }}</p><br><br>
     {% if task.time_estimated %}
-        <p id="estimated">Estimation: {{ task.time_estimated }}</p>
+        <p id="estimated">Estimation: {{ task.time_estimated|date:'M. d, Y' }}</p>
     {% endif%}
     {% if task.time_published %}
     <div class="date">
-        <p id="published_at">Published at: {{ task.time_published }}</p>
+        <p id="published_at">Published at: {{ task.time_published|date:'M. j, Y, h:i A' }}</p>
     </div>
     {% endif %}
     {% if task.time_edited %}
     <div class="edited_date">
-        <p id="edited_at">Edited at: {{ task.time_edited }}</p>
+        <p id="edited_at">Edited at: {{ task.time_edited|date:'M. j, Y, h:i A' }}</p>
     </div>
     {% endif %}
     <a id="edit_task_task_detail" href="{% url 'edit_task' pk=task.pk %}">Edit task</a>

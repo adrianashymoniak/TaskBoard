@@ -12,6 +12,18 @@
     - For Windows **myenv\Scripts\activate**
 * Install django: **pip install django~=2.0**
 * Clone repository: **git clone https://adrianashymoniak@bitbucket.org/adrianashymoniak/tasks-board.git**
+* Install postgresql: <br />
+**sudo apt-get update** <br />
+**sudo apt-get install postgresql postgresql-contrib**
+* Create db and db user: 
+    * **sudo -i -u postgres**
+    * CREATE USER **set_user_name_here** WITH PASSWORD '**set_password_here**'
+    * CREATE DATABASE task_board_db
+* Edit settings.py with updating the following **DATABASES** params:
+    * 'NAME': 'task_board_db',
+    * 'USER': 'set_user_name_created_in_previous_step', 
+    * 'PASSWORD': 'set_password_created_in_previous_step',
+    * 'HOST': 'set_host_url',
 * Go to **task-board** folder and run migration: **python manage.py migrate**
 * **python manage.py makemigrations**
 * Run server locally: **python manage.py runserver**
@@ -21,4 +33,5 @@
  
 #####End to end tests
 * Run command **pip install git+https://github.com/yashaka/selene.git** for installing Selene framework
+* Run command **pip install psycopg2-binary** for installing Psycopg (for creating connection to db)
 * Run tests with **python -m unittest discover e2etests** (chrome should be installed)

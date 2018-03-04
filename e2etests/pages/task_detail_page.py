@@ -15,15 +15,13 @@ class TaskDetailPage:
         title = browser.element('#task_title_detail').text
         description = browser.element('#task_description').text
         estimated = browser.element('#estimated').text.replace('Estimation: ', '')
-        published = browser.element('#published_at').text.replace('Published at: ', '').replace('a.m.', 'AM').replace(
-            'p.m.', 'PM')
+        published = browser.element('#published_at').text.replace('Published at: ', '')
         return Task(title, description, datetime.strptime(estimated, '%b. %d, %Y').date(),
                     datetime.strptime(published, '%b. %d, %Y, %I:%M %p'))
 
     def read_edited_task(self):
         task = self.read_task()
-        edited = browser.element('#edited_at').text.replace('Edited at: ', '').replace('a.m.', 'AM').replace(
-            'p.m.', 'PM')
+        edited = browser.element('#edited_at').text.replace('Edited at: ', '')
         task.edited = datetime.strptime(edited, '%b. %d, %Y, %I:%M %p')
         return task
 

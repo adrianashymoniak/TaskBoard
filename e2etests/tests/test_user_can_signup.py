@@ -21,4 +21,5 @@ class UserCanSignup(BaseTest):
         self.assertIn(self.user_signing_up.username, greeting, 'Greeting does not contain username')
 
     def tearDown(self):
+        super(UserCanSignup, self).tearDown()
         SQLHelper.delete_user(self.user_signing_up)
