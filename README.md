@@ -24,8 +24,8 @@
     * 'USER': 'set_user_name_created_in_previous_step', 
     * 'PASSWORD': 'set_password_created_in_previous_step',
     * 'HOST': 'set_host_url',
-* Go to **task-board** folder and run migration: **python manage.py migrate**
-* **python manage.py makemigrations**
+* Go to **task-board** folder and run migration: **python manage.py migrate --settings=task_board_application.settings.local**
+* **python manage.py makemigrations --settings=task_board_application.settings.local** 
 * Run server locally: **python manage.py runserver --settings=task_board_application.settings.local**
 * Open browser and go to  **http://127.0.0.1:8000/** -> click signup and create your own user
 
