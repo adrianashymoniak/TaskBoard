@@ -1,20 +1,12 @@
-import dj_database_url
 from .base import *
+import dj_database_url
 
+ENVIRONMENT = 'production'
+ALLOWED_HOSTS = ['*']
+SECRET_KEY = 'SECRET_KEY'
 DEBUG = False
-
-ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': '',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',
-        'PORT': '',
-    }
+    'default': dj_database_url.config(
+        default='DATABASE_URL'
+    )
 }
-
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)

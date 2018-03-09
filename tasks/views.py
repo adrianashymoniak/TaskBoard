@@ -2,6 +2,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
+from datetime import datetime
 
 from .forms import SignUpForm, TaskForm
 from .models import Task
@@ -35,7 +36,7 @@ def create_task(request):
         if form.is_valid():
             task = form.save(commit=False)
             task.user = request.user
-            task.time_published = timezone.now()
+            task.time_published = datetime.now()
             task.save()
             return redirect('task_detail', pk=task.pk)
     else:
@@ -55,7 +56,7 @@ def edit_task(request, pk):
         if form.is_valid():
             task = form.save(commit=False)
             task.user = request.user
-            task.time_edited = timezone.now()
+            task.time_edited = datetime.now()
             task.save()
             return redirect('task_detail', pk=task.pk)
     else:
