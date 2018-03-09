@@ -7,7 +7,7 @@
     <p>{{ task.task_description }}</p>
     <div class="date">
         {% if task.time_estimated != Blank %}
-            <p>estimated: {{ task.time_estimated }}</p></br>
+            <p>Estimated: {{ task.time_estimated|date:'M. d, Y' }}</p></br>
         {% endif %}
     </div>
 </div>

@@ -12,6 +12,7 @@ from e2etests.configs import BASE_URL, HEADLESS
 from e2etests.domain.task import Task
 from e2etests.domain.user import User
 from e2etests.util.sql_helper import SQLHelper
+import pytz
 
 
 class BaseTest(TestCase):
@@ -42,7 +43,7 @@ class BaseTest(TestCase):
 
     def get_test_task(self, user):
         task = Task((str(datetime.now()) + ' Task title'), 'task description',
-                    date.today(), datetime.now().replace(second=0, microsecond=0),
+                    date.today(), datetime.now(pytz.timezone('Europe/Kiev')).replace(second=0, microsecond=0),
                     user_id=user.user_id)
         SQLHelper.create_task(task)
         return task
