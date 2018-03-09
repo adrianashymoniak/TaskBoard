@@ -73,7 +73,7 @@ WSGI_APPLICATION = 'task_board_application.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postogresql',
         'NAME': '',
         'USER': '',
         'PASSWORD': '',
