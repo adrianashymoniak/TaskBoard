@@ -1,5 +1,3 @@
-from selene.conditions import text
-
 from e2etests.pages.login_page import LoginPage
 from e2etests.tests.test_base import BaseTest
 

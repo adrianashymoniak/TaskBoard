@@ -6,7 +6,7 @@
 image: python:3.6.3
 clone:
   depth: full
-  
+
 pipelines:
   default:
     - step:
@@ -16,10 +16,11 @@ pipelines:
 
     - step:
         name: Run tests against test server
+        image: joyzoursky/python-chromedriver:3.6-selenium
         caches:
           - pip
         script:
-           - pip install requirements-tests.txt
-           - echo "BASE_URL = '$TEST_SERVER_BASE_URL'\nDB_SETUP = {'database': '$DB_NAME', 'user': '$DB_USER', 'password': '$DB_PASSWORD', 'host': '$DB_HOST', 'port': '$DB_PORT'}\nHEADLESS = True\n" > e2etests/configs.py
-           - cat e2etests/configs.py
-           - nosetests --with-xunit -v -m "(tests)|(^test_)"
+           - pip install -r requirements.txt
+           - echo -e "BASE_URL = '$TEST_SERVER_BASE_URL'\nDB_SETUP = {'database':'$DB_NAME', 'user':'$DB_USER', 'password':'$DB_PASSWORD', 'host':'$DB_HOST', 'port':'$DB_PORT'}\nHEADLESS = True\nAPP_TIME_ZONE = 'Europe/Kiev'\n" > e2etests/configs.py
+           - mkdir test-reports
+           - nosetests --with-xunit -v -m "(tests)|(^test_user_can_)" --xunit-file=./test-reports/nose-junit.xml

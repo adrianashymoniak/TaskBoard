@@ -1,6 +1,7 @@
 from datetime import datetime, date
 from unittest import TestCase
 
+import pytz
 from selene import browser
 from selene import config
 from selene.browsers import BrowserName
@@ -8,11 +9,10 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 
-from e2etests.configs import BASE_URL, HEADLESS
+from e2etests.configs import BASE_URL, HEADLESS, APP_TIME_ZONE
 from e2etests.domain.task import Task
 from e2etests.domain.user import User
 from e2etests.util.sql_helper import SQLHelper
-import pytz
 
 
 class BaseTest(TestCase):
@@ -22,6 +22,8 @@ class BaseTest(TestCase):
         chrome_options = Options()
         if HEADLESS:
             chrome_options.add_argument("--headless")
+            chrome_options.add_argument("window-size=1024,768")
+            chrome_options.add_argument("--no-sandbox")
         browser.set_driver(webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options))
 
     first_test_user = None
@@ -43,10 +45,13 @@ class BaseTest(TestCase):
 
     def get_test_task(self, user):
         task = Task((str(datetime.now()) + ' Task title'), 'task description',
-                    date.today(), datetime.now(pytz.timezone('Europe/Kiev')).replace(second=0, microsecond=0),
+                    date.today(), datetime.utcnow().replace(second=0, microsecond=0),
                     user_id=user.user_id)
         SQLHelper.create_task(task)
         return task
+
+    def get_app_time(self):
+        return datetime.now(pytz.timezone(APP_TIME_ZONE)).replace(second=0, microsecond=0, tzinfo=None)
 
     def tearDown(self):
         SQLHelper.delete_tasks_for_user(self.get_first_test_user())
