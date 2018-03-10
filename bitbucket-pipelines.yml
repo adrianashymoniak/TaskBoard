@@ -4,15 +4,12 @@
 # -----
 # You can specify a custom docker image from Docker Hub as your build environment.
 image: python:3.6.3
-
+clone:
+  depth: full
+  
 pipelines:
   default:
     - step:
-        caches:
-          - pip
-        script: # Modify the commands below to build your repository.
-          - pip install -r requirements.txt
-          - pip install nose
-          - python manage.py migrate --settings=task_board_application.settings.production
-          - python manage.py runserver --settings=task_board_application.settings.production >> django.log 2>&1 &
-          - nosetests --with-xunit -v -m "(tests)|(^test_)"
+        script: 
+        - git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git HEAD
+          
