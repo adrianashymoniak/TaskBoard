@@ -1,0 +1,23 @@
+.alignment {
+    margin: auto;
+    padding: 10px;
+    text-align: center;
+}
+
+#login {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.username, .password {
+    margin-top: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    width: 200px;
+}
+
+.btn.btn-primary {
+    width: 200px;
+}

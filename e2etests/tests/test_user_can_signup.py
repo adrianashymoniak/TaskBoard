@@ -9,7 +9,7 @@ from e2etests.util.sql_helper import SQLHelper
 class UserCanSignup(BaseTest):
     def setUp(self):
         super(UserCanSignup, self).setUp()
-        self.user_signing_up = User((datetime.utcnow().strftime("%m-%d-%Y_%H.%M_%S") + '_adminaccount'),
+        self.user_signing_up = User((datetime.utcnow().strftime("%m-%d-%Y_%H.%M_%S") + '_test_account'),
                                     'admin123', email='testemail@email.com',
                                     password_confirm='admin123')
 

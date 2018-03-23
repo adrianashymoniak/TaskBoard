@@ -12,11 +12,6 @@
     <label for="time_estimated">Time estimated:</label>
     <input id="time_estimated" type="date" name="time_estimated" value="{{ task.time_estimated|date:'Y-m-d'}}">
     <br><br>
-    <button id="edit_task" type="submit">Edit task</button>
-    <br><br>
-    <a id="delete_task_edit_page" href="{% url 'delete' pk=task.pk %}">Delete task</a>
-    <br>
-    <br>
-    <a id="go_detail_page" href="{% url 'task_detail' pk=task.pk %}"> << Go back to 'Task detail' page </a>
+    <button id="edit_task" type="submit" class="btn btn-primary">Edit</button>
 </form>
 {% endblock %}

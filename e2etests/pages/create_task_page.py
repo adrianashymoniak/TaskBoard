@@ -32,6 +32,6 @@ class CreateTaskPage:
         return self
 
     def cancel(self):
-        browser.element('#cancel').click()
+        browser.element('#home_page').click()
         from e2etests.pages.home_page import HomePage
         return HomePage()

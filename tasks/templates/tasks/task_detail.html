@@ -17,12 +17,5 @@
         <p id="edited_at">Edited at: {{ task.time_edited|date:'M. j, Y, h:i A' }}</p>
     </div>
     {% endif %}
-    <a id="edit_task_task_detail" href="{% url 'edit_task' pk=task.pk %}">Edit task</a>
-    <br>
-    <br>
-    <a id="delete_task" href="{% url 'delete' pk=task.pk %}">Delete task</a>
-    <br>
-    <br>
-    <a id="home_page" href="{% url 'home' %}"> << Go back to 'Home' page</a>
 </div>
 {% endblock %}

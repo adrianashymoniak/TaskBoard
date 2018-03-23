@@ -26,7 +26,7 @@ class TaskDetailPage:
         return task
 
     def delete_task(self):
-        browser.element('#delete_task').click()
+        browser.element('#delete_task_edit_page').click()
         from e2etests.pages.home_page import HomePage
         return HomePage()
 

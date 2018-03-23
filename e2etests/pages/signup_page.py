@@ -14,5 +14,5 @@ class SignUpPage:
         browser.element('#email').set_value(user.email)
         browser.element('#password1').set_value(user.password)
         browser.element('#password2').set_value(user.password_confirm)
-        browser.element('#signup').click()
+        browser.element('#signup_btn').click()
         return HomePage()

@@ -8,11 +8,20 @@
 {% else %}
 {% block title %} Login {% endblock %}
 {% block content %}
-<h2>Login</h2>
-<form method='post'>
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button id="login" type="submit">Login</button>
-</form>
+<div class="alignment">
+    <h2>Login</h2>
+    <form method='post'>
+        {% csrf_token %}
+        <div class="username">
+            <label for="id_username">Username:</label><br>
+            <input type="text" name="username" autofocus="" maxlength="254" required="" id="id_username">
+        </div>
+        <div class="password">
+            <label for="id_password">Password:</label><br>
+            <input type="password" name="password" required="" id="id_password">
+        </div>
+        <button id="login_btn" type="submit" class="btn btn-primary">Login</button>
+    </form>
+</div>
 {% endblock %}
 {% endif %}

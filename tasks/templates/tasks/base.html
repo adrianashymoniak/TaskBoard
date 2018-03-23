@@ -1,23 +1,49 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/tasks.css' %}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
     <header>
-        {% if user.is_authenticated %}
-                <a id="logout" href="{% url 'logout' %}">logout</a>
-                <p id="greeting">Hi {{user.username}}!</p>
-                <a id="create_task" href="{% url 'create_task' %}">Create task</a> <br>
-                <a id="delete_all_tasks" href="{% url 'delete_all' %}">Delete tasks</a>
-        {% else %}
-                <a href="{% url 'signup' %}">signup</a>
-        {% endif %}
-        <br>
-        <hr>
-        <br>
-    </header>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a id="home_page" class="navbar-brand" href="{% url 'home' %}">Tasks Board</a>
+                </div>
+                {% if user.is_authenticated %}
+                    <ul class="nav navbar-nav">
+                      <li class="active"><a id="create_task" href="{% url 'create_task' %}">Create Task</a></li>
+                      <li><a id="delete_all_tasks" href="{% url 'delete_all' %}">Delete All Tasks</a></li>
+                       {% url 'task_detail' pk=task.pk as edit_url %}
+                       {% if request.get_full_path == edit_url %}
+                            <li><a id="delete_task_edit_page" href="{% url 'delete' pk=task.pk %}">Delete task</a></li>
+                            <li><a id="edit_task_task_detail" href="{% url 'edit_task' pk=task.pk %}">Edit task</a></li>
+                       {% endif %}
+                       {% url 'edit_task' pk=task.pk as edit_task_url %}
+                       {% if request.get_full_path == edit_task_url %}
+                            <li><a id="delete_task_edit_page" href="{% url 'delete' pk=task.pk %}">Delete task</a></li>
+                            <li><a id="go_detail_page" href="{% url 'task_detail' pk=task.pk %}">Task Detail</a></li>
+                       {% endif %}
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                      <li><p id="greeting" class="navbar-text"> Hello {{user.username}}</p></li>
+                      <li><a id="logout" href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span>  Logout</a></li>
+                    </ul>
+                {% else %}
+                    <ul class="nav navbar-nav navbar-right">
+                      <li><a id="login" href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span>  Login</a></li>
+                      <li><a id="signup" href="{% url 'signup' %}"><span class="glyphicon glyphicon-user"></span>  Signup</a></li>
+                    </ul>
+                {% endif %}
+            </div>
+        </nav>
     {% if user.is_anonymous %}
         {% block content %}
         {% endblock %}
@@ -25,6 +51,5 @@
         {% block body %}
         {% endblock %}
     {% endif %}
-
 </body>
 </html>
