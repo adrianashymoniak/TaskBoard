@@ -19,7 +19,7 @@
                 </div>
                 {% if user.is_authenticated %}
                     <ul class="nav navbar-nav">
-                      <li class="active"><a id="create_task" href="{% url 'create_task' %}">Create Task</a></li>
+                      <li><a id="create_task" href="{% url 'create_task' %}">Create Task</a></li>
                       <li><a id="delete_all_tasks" href="{% url 'delete_all' %}">Delete All Tasks</a></li>
                        {% url 'task_detail' pk=task.pk as edit_url %}
                        {% if request.get_full_path == edit_url %}
