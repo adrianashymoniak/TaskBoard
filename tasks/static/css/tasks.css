@@ -21,3 +21,11 @@
 .btn.btn-primary {
     width: 200px;
 }
+
+.form-control {
+    margin-top: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    width: 200px;
+}
