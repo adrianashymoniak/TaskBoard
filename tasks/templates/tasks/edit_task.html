@@ -3,15 +3,20 @@
 {% block body %}
 <form method="post">
     {% csrf_token %}
-    <label for="task_title">Task title: </label>
-    <input id="task_title" type="text" name="task_title" maxlength="150" value="{{ task.task_title }}">
-    <br><br>
-    <label for="task_description">Task description:</label>
-    <textarea id="task_description" name="task_description">{{ task.task_description }}</textarea>
-    <br><br>
-    <label for="time_estimated">Time estimated:</label>
-    <input id="time_estimated" type="date" name="time_estimated" value="{{ task.time_estimated|date:'Y-m-d'}}">
-    <br><br>
-    <button id="edit_task" type="submit" class="btn btn-primary">Edit</button>
+    <div class="form-group-title">
+        <label for="task_title">Task title</label>
+        <input class="form-control" id="task_title" type="text" name="task_title" maxlength="150" value="{{ task.task_title }}"/>
+    </div>
+    <div class="form-group-description">
+        <label for="task_description">Task description</label>
+        <textarea class="form-control" rows="5" cols="50" id="task_description" name="task_description">{{ task.task_description }}</textarea>
+    </div>
+    <div class="form-group-time-estimation">
+        <label for="time_estimated">Time estimated:</label>
+        <input class="form-control" id="time_estimated" type="date" name="time_estimated" value="{{ task.time_estimated|date:'Y-m-d'}}">
+    </div>
+    <div class="form-group-buttons">
+        <button id="edit_task" type="submit" class="btn btn-primary">Edit</button>
+    </div>
 </form>
 {% endblock %}

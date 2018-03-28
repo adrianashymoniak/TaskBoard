@@ -1,5 +1,8 @@
 .alignment {
-    margin: auto;
+    margin-top: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
     padding: 10px;
     text-align: center;
 }
@@ -10,7 +13,7 @@
     margin-right: auto;
 }
 
-.username, .password {
+.username, .password, .sign_up_fields, .btn.btn-primary {
     margin-top: auto;
     margin-left: auto;
     margin-right: auto;
@@ -18,8 +21,12 @@
     width: 200px;
 }
 
-.btn.btn-primary {
-    width: 200px;
+.error_message, error_message2 {
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    width: 95%;
 }
 
 .form-control {
@@ -27,5 +34,33 @@
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 20px;
-    width: 200px;
+}
+
+.form-group-title, .form-group-description, .form-group-buttons {
+    margin-top: auto;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 20px;
+    width: 60%;
+}
+
+.form-group-time-estimation {
+    margin-top: auto;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 20px;
+    width: 150px;
+}
+#save_task, #edit_task {
+    background-color: #269622;
+    border-color: #269622;
+}
+
+#reset_fields {
+    background-color: #a53d17;
+    border-color: #a53d17;
+}
+
+textarea {
+   resize: none;
 }

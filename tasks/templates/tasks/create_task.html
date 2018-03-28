@@ -2,16 +2,36 @@
 {% block body %}
 <form method="post">
     {% csrf_token %}
-    <label for="task_title">Task title: </label>
-    <input id="task_title" type="text" name="task_title" maxlength="150" required/>
-    <br><br>
-    <label for="task_description">Task description:</label>
-    <textarea id="task_description" name="task_description" required></textarea>
-    <br><br>
-    <label for="time_estimated">Time estimated:</label>
-    <input id="time_estimated" type="date" name="time_estimated">
-    <br><br>
-    <button id="save_task" type="submit" class="btn btn-primary">Save</button>
-    <button id="reset_fields" type="reset" class="btn btn-primary">Reset</button>
+    <div class="form-group-title">
+        <label for="task_title">Task title</label>
+        <input class="form-control" id="task_title" type="text" name="task_title" maxlength="150" required/>
+    </div>
+    <div class="form-group-description">
+        <label for="task_description">Task description</label>
+        <textarea class="form-control" rows="5" cols="50" id="task_description" name="task_description" required></textarea>
+    </div>
+    <div class="form-group-time-estimation">
+        <label for="time_estimated">Time estimated</label>
+        <input class="form-control" id="time_estimated" type="date" name="time_estimated">
+    </div>
+    <script>
+        $(document).ready(function() {
+        var date = new Date();
+
+        var day = date.getDate();
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+
+        if (month < 10) month = "0" + month;
+        if (day < 10) day = "0" + day;
+
+        var today = year + "-" + month + "-" + day;
+        $("#time_estimated").attr("value", today);
+    });
+    </script>
+    <div class="form-group-buttons">
+        <button id="save_task" type="submit" class="btn btn-primary">Save</button>
+        <button id="reset_fields" type="reset" class="btn btn-primary">Reset</button>
+    </div>
 </form>
 {% endblock %}
