@@ -1,15 +1,40 @@
 {% extends 'tasks/base.html' %}
 {% block title %}Tasks List{% endblock %}
 {% block body %}
-{% for task in tasks %}
-<div class="container">
-    <h1><a id="task_title" href="{% url 'task_detail' pk=task.pk %}">{{ task.task_title }}</a></h1>
-    <p>{{ task.task_description }}</p>
-    <div class="date">
-        {% if task.time_estimated != Blank %}
-            <p>Estimated: {{ task.time_estimated|date:'M. d, Y' }}</p></br>
-        {% endif %}
+
+<div class="row">
+    <div class="column">
+        <h2 class="column_name_new">New</h2>
+        <div class="task_column">
+            {% for task in tasks %}
+                {% if task.status == 'New' %}
+                     <h4><a id="task_title" href="{% url 'task_detail' pk=task.pk %}">#{{task.pk}}: {{ task.task_title }}</a>
+                     </h4>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    <div class="column">
+        <h2 class="column_name_in_progress">In progress</h2>
+        <div class="task_column">
+            {% for task in tasks %}
+                {% if task.status == 'In progress' %}
+                        <h4><a id="task_title" href="{% url 'task_detail' pk=task.pk %}">#{{task.pk}}: {{ task.task_title }}</a>
+                        </h4>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    <div class="column">
+        <h2 class="column_name_done">Done</h2>
+        <div class="task_column">
+            {% for task in tasks %}
+                {% if task.status == 'Done' %}
+                    <h4><a id="task_title" href="{% url 'task_detail' pk=task.pk %}">#{{task.pk}}: {{ task.task_title }}</a>
+                    </h4>
+                {% endif %}
+            {% endfor %}
+            </div>
     </div>
 </div>
-{% endfor %}
 {% endblock%}

@@ -36,6 +36,7 @@ def create_task(request):
             task = form.save(commit=False)
             task.user = request.user
             task.time_published = datetime.now()
+            task.status = 'New'
             task.save()
             return redirect('task_detail', pk=task.pk)
     else:

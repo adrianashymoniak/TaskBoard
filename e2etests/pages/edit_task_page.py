@@ -1,11 +1,13 @@
 from selene import browser
+from selenium.webdriver.support.ui import Select
 
 
 class EditTaskPage:
-    def edit(self, task):
-        browser.element('#task_title').set_value(task.title)
-        browser.element('#task_description').set_value(task.description)
-        browser.element('#time_estimated').send_keys(task.estimated.strftime("%m-%d-%Y"))
+    def edit(self, task=None):
+        if task is not None:
+            browser.element('#task_title').set_value(task.title)
+            browser.element('#task_description').set_value(task.description)
+            browser.element('#time_estimated').send_keys(task.estimated.strftime("%m-%d-%Y"))
         browser.element('#edit_task').click()
         from e2etests.pages.task_detail_page import TaskDetailPage
         return TaskDetailPage()
@@ -19,3 +21,8 @@ class EditTaskPage:
         browser.element('#delete_task_edit_page').click()
         from e2etests.pages.home_page import HomePage
         return HomePage()
+
+    def select_status_by_visible_text(self, visible_text):
+        select = Select(browser.element('#id_status'))
+        select.select_by_visible_text(visible_text)
+        return self

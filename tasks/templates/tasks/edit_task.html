@@ -3,6 +3,14 @@
 {% block body %}
 <form method="post">
     {% csrf_token %}
+    <div class="form-group-status">
+        <label for="id_status">Status</label>
+        <select name="status" id="id_status" class="form-control">
+            <option value="New" {% if task.status == "New" %}selected="selected"{% endif %}>New</option>
+            <option value="In progress" {% if task.status == "In progress" %}selected="selected"{% endif %}>In progress</option>
+            <option value="Done" {% if task.status == "Done" %}selected="selected"{% endif %}>Done</option>
+        </select>
+    </div>
     <div class="form-group-title">
         <label for="task_title">Task title</label>
         <input class="form-control" id="task_title" type="text" name="task_title" maxlength="150" value="{{ task.task_title }}"/>
@@ -15,8 +23,6 @@
         <label for="time_estimated">Time estimated:</label>
         <input class="form-control" id="time_estimated" type="date" name="time_estimated" value="{{ task.time_estimated|date:'Y-m-d'}}">
     </div>
-    <div class="form-group-buttons">
-        <button id="edit_task" type="submit" class="btn btn-primary">Edit</button>
-    </div>
+    <button id="edit_task" type="submit" class="btn btn-primary">Edit</button>
 </form>
 {% endblock %}

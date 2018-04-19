@@ -14,21 +14,6 @@
         <label for="time_estimated">Time estimated</label>
         <input class="form-control" id="time_estimated" type="date" name="time_estimated">
     </div>
-    <script>
-        $(document).ready(function() {
-        var date = new Date();
-
-        var day = date.getDate();
-        var month = date.getMonth() + 1;
-        var year = date.getFullYear();
-
-        if (month < 10) month = "0" + month;
-        if (day < 10) day = "0" + day;
-
-        var today = year + "-" + month + "-" + day;
-        $("#time_estimated").attr("value", today);
-    });
-    </script>
     <div class="form-group-buttons">
         <button id="save_task" type="submit" class="btn btn-primary">Save</button>
         <button id="reset_fields" type="reset" class="btn btn-primary">Reset</button>

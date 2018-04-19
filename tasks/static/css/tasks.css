@@ -44,12 +44,12 @@
     width: 60%;
 }
 
-.form-group-time-estimation {
+.form-group-time-estimation, .form-group-status, #edit_task {
     margin-top: auto;
     margin-left: 50px;
     margin-right: 50px;
     margin-bottom: 20px;
-    width: 150px;
+    width: 200px;
 }
 #save_task, #edit_task {
     background-color: #269622;
@@ -63,4 +63,90 @@
 
 textarea {
    resize: none;
+}
+
+.column {
+    float:left;
+    width: 33%;
+    padding: 30px;
+
+}
+
+@media screen and (max-width: 600px) {
+    .column {
+        width: 100%;
+    }
+}
+.column_name_new{
+    text-align: center;
+    background: #495a77;
+    color: #ffffff;
+}
+
+
+.column_name_in_progress {
+    text-align: center;
+    background: #ce8d00;
+    color: #ffffff;
+}
+.column_name_done {
+    text-align: center;
+    background: #51c944;
+    color: #ffffff;
+}
+.status_new {
+    display: block;
+    margin-left: 30px;
+    margin-right: auto;
+    width: 150px;
+    text-align: center;
+    background: #495a77;
+    color: #ffffff;
+}
+.status_in_progress {
+    display: block;
+    margin-left: 30px;
+    margin-right: auto;
+    width: 150px;
+    text-align: center;
+    background: #ce8d00;
+    color: #ffffff;
+}
+.status_done {
+    display: block;
+    margin-left: 30px;
+    margin-right: auto;
+    width: 150px;
+    text-align: center;
+    background: #51c944;
+    color: #ffffff;
+}
+
+.task_column a {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: block;
+    overflow: hidden;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.task_title {
+    color: #337ab7;
+}
+
+.task_description, .task_title, .time {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 30px;
+    text-align: justify;
+    width: 60%;
+
+
+}
+.time {
+    display: block;
+    margin-top: 50px;
+    padding-top: 10px;
 }
