@@ -13,7 +13,7 @@ class Task(models.Model):
     time_published = models.DateTimeField(default=datetime.now, blank=True)
     time_edited = models.DateTimeField(null=True, blank=True)
     status = models.CharField(max_length=11,
-                              choices=(('New', 'new'), ('In progress', 'in progress'), ('Done', 'done'),), default=None)
+                              choices=(('New', 'new'), ('In progress', 'in progress'), ('Done', 'done'),), blank=True)
 
     def __str__(self):
         return self.task_title, self.task_description

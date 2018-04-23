@@ -24,7 +24,8 @@ class BaseTest(TestCase):
             chrome_options.add_argument("--headless")
             chrome_options.add_argument("window-size=1024,768")
             chrome_options.add_argument("--no-sandbox")
-        browser.set_driver(webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options))
+        # browser.set_driver(webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options))
+        browser.set_driver(webdriver.Chrome(options=chrome_options))
 
     first_test_user = None
     second_test_user = None
