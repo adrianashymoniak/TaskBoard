@@ -2,7 +2,7 @@ from .base import *
 import dj_database_url
 
 ENVIRONMENT = 'production'
-ALLOWED_HOSTS = ['']
+ALLOWED_HOSTS = ['.herokuapp.com']
 SECRET_KEY = 'SECRET_KEY'
 DEBUG = False
 DATABASES = {
