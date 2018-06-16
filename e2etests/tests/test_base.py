@@ -12,6 +12,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from e2etests.configs import BASE_URL, HEADLESS, APP_TIME_ZONE
 from e2etests.domain.task import Task
 from e2etests.domain.user import User
+from e2etests.pages.page_not_found_page import PageNotFoundPage
 from e2etests.util.sql_helper import SQLHelper
 
 
@@ -58,3 +59,7 @@ class BaseTest(TestCase):
         SQLHelper.delete_tasks_for_user(self.get_first_test_user())
         SQLHelper.delete_tasks_for_user(self.get_second_test_user())
         browser.close()
+
+    def open_incorrect_url(self, incorrect_url):
+        browser.open_url(incorrect_url)
+        return PageNotFoundPage()

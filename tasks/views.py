@@ -1,8 +1,9 @@
+from datetime import datetime
+
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 
-from datetime import datetime
 from .forms import SignUpForm, TaskForm
 from .models import Task
 
@@ -29,6 +30,7 @@ def home(request):
     return render(request, 'tasks/home_page.html', {'tasks': tasks})
 
 
+@login_required
 def create_task(request):
     if request.method == "POST":
         form = TaskForm(request.POST)
@@ -44,11 +46,13 @@ def create_task(request):
         return render(request, 'tasks/create_task.html', {'form': form})
 
 
+@login_required
 def task_detail(request, pk):
     task = get_object_or_404(Task, pk=pk)
     return render(request, 'tasks/task_detail.html', {'task': task})
 
 
+@login_required
 def edit_task(request, pk):
     task = get_object_or_404(Task, pk=pk)
     if request.method == "POST":
@@ -63,11 +67,23 @@ def edit_task(request, pk):
         return render(request, 'tasks/edit_task.html', {'task': task})
 
 
+@login_required
 def delete_task(request, pk):
     Task.objects.get(pk=pk).delete()
     return redirect('home')
 
 
+@login_required
 def delete_all(request):
     Task.objects.filter(user_id=request.user).delete()
     return redirect('home')
+
+
+def error_404(request, exception):
+    data = {}
+    return render(request, 'tasks/errors/404.html', data)
+
+
+def error_500(request, exception):
+    data = {}
+    return render(request, 'tasks/errors/500.html', data)
