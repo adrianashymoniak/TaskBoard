@@ -16,7 +16,8 @@ class TaskDetailPage:
         description = browser.element('#task_description').text
         estimated = browser.element('#estimated').text.replace('Estimation: ', '')
         published = browser.element('#published_at').text.replace('Published at: ', '')
-        return Task(title, description, datetime.strptime(estimated, '%b. %d, %Y').date(),
+        priorities = browser.element('#id_priorities').text
+        return Task(title, description, datetime.strptime(estimated, '%b. %d, %Y').date(), priorities,
                     datetime.strptime(published, '%b. %d, %Y, %I:%M %p'))
 
     def read_edited_task(self):

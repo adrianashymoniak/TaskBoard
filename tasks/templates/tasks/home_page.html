@@ -6,7 +6,21 @@
         <div class="task_column">
             {% for task in tasks %}
                 {% if task.status == 'New' %}
-                     <h4><a id="task_title" href="{% url 'task_detail' pk=task.pk %}">#{{task.pk}}: {{ task.task_title }}</a>
+                     <h4><a id="task_title" href="{% url 'task_detail' pk=task.pk %}">
+                             {% if task.priorities == 'Minor' %}
+                                <img src="/static/images/minor.png" width="19" height="19">
+                                <span>#{{task.pk}}: {{ task.task_title }}</span>
+                             {% elif task.priorities == 'Normal' %}
+                                <img src="/static/images/normal.png" width="19" height="19">
+                                <span>#{{task.pk}}: {{ task.task_title }}</span>
+                             {% elif task.priorities == 'Major' %}
+                                <img src="/static/images/major.png" wwidth="19" height="19">
+                                <span>#{{task.pk}}: {{ task.task_title }}</span>
+                             {% else %}
+                                <img src="/static/images/critical.png" width="19" height="19">
+                                <span>#{{task.pk}}: {{ task.task_title }}</span>
+                             {% endif %}
+                        </a>
                      </h4>
                 {% endif %}
             {% endfor %}
@@ -17,7 +31,21 @@
         <div class="task_column">
             {% for task in tasks %}
                 {% if task.status == 'In progress' %}
-                        <h4><a id="task_title" href="{% url 'task_detail' pk=task.pk %}">#{{task.pk}}: {{ task.task_title }}</a>
+                        <h4><a id="task_title" href="{% url 'task_detail' pk=task.pk %}">
+                             {% if task.priorities == 'Minor' %}
+                                <img src="/static/images/minor.png" width="19" height="19">
+                                <span>#{{task.pk}}: {{ task.task_title }}</span>
+                             {% elif task.priorities == 'Normal' %}
+                                <img src="/static/images/normal.png" width="19" height="19">
+                                <span>#{{task.pk}}: {{ task.task_title }}</span>
+                             {% elif task.priorities == 'Major' %}
+                                <img src="/static/images/major.png" wwidth="19" height="19">
+                                <span>#{{task.pk}}: {{ task.task_title }}</span>
+                             {% else %}
+                                <img src="/static/images/critical.png" width="19" height="19">
+                                <span>#{{task.pk}}: {{ task.task_title }}</span>
+                             {% endif %}
+                            </a>
                         </h4>
                 {% endif %}
             {% endfor %}
@@ -28,7 +56,21 @@
         <div class="task_column">
             {% for task in tasks %}
                 {% if task.status == 'Done' %}
-                    <h4><a id="task_title" href="{% url 'task_detail' pk=task.pk %}">#{{task.pk}}: {{ task.task_title }}</a>
+                    <h4><a id="task_title" href="{% url 'task_detail' pk=task.pk %}">
+                              {% if task.priorities == 'Minor' %}
+                                <img src="/static/images/minor.png" width="19" height="19">
+                                <span>#{{task.pk}}: {{ task.task_title }}</span>
+                             {% elif task.priorities == 'Normal' %}
+                                <img src="/static/images/normal.png" width="19" height="19">
+                                <span>#{{task.pk}}: {{ task.task_title }}</span>
+                             {% elif task.priorities == 'Major' %}
+                                <img src="/static/images/major.png" wwidth="19" height="19">
+                                <span>#{{task.pk}}: {{ task.task_title }}</span>
+                             {% else %}
+                                <img src="/static/images/critical.png" width="19" height="19">
+                                <span>#{{task.pk}}: {{ task.task_title }}</span>
+                             {% endif %}
+                    </a>
                     </h4>
                 {% endif %}
             {% endfor %}

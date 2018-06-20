@@ -8,7 +8,7 @@ from e2etests.tests.test_base import BaseTest
 class UserCanResetFilledTaskFields(BaseTest):
     def test_user_can_reset_filled_task_fields(self):
         user = self.get_first_test_user()
-        task_to_enter = Task('Test title', 'Test description', date.today())
+        task_to_enter = Task('Test title', 'Test description', date.today(), 'Minor')
 
         entered_task = (LoginPage
                         .open()

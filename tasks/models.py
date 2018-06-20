@@ -14,6 +14,9 @@ class Task(models.Model):
     time_edited = models.DateTimeField(null=True, blank=True)
     status = models.CharField(max_length=11,
                               choices=(('New', 'new'), ('In progress', 'in progress'), ('Done', 'done'),), blank=True)
+    priorities = models.CharField(max_length=8,
+                                  choices=(('Minor', 'minor'), ('Normal', 'normal'), ('Major', 'major'),
+                                           ('Critical', 'critical'),), blank=True)
 
     def __str__(self):
         return self.task_title, self.task_description

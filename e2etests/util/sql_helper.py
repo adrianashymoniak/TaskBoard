@@ -53,8 +53,8 @@ class SQLHelper:
     def create_task(task):
         connection = SQLHelper.create_connection()
         with connection:
-            create_task_sql = ''' INSERT INTO tasks_task(task_title, task_description, time_published, time_edited, user_id, time_estimated, status)
-            VALUES(%s, %s, %s, NULL, %s, %s, 'New')'''
+            create_task_sql = ''' INSERT INTO tasks_task(task_title, task_description, time_published, time_edited, user_id, time_estimated, status, priorities)
+            VALUES(%s, %s, %s, NULL, %s, %s, 'New', 'Normal')'''
             cursor = connection.cursor()
             cursor.execute(create_task_sql,
                            (task.title, task.description, task.published, task.user_id, task.estimated))

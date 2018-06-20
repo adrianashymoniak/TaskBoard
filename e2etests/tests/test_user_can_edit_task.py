@@ -9,7 +9,8 @@ class UserCanEditTask(BaseTest):
     def test_user_can_edit_task(self):
         user = self.get_first_test_user()
         test_task = self.get_test_task(user)
-        expected_task = Task('Test title', 'Test description', date.today(), self.get_app_time(), self.get_app_time())
+        expected_task = Task('Test title', 'Test description', date.today(), 'Major', self.get_app_time(),
+                             self.get_app_time())
         actual_task = (LoginPage
                        .open()
                        .login_as(user)

@@ -8,7 +8,7 @@ from e2etests.tests.test_base import BaseTest
 class UserCanCancelTaskCreation(BaseTest):
     def test_user_can_cancel_task_creation(self):
         user = self.get_first_test_user()
-        task_to_enter = Task('Test title', 'Test description', date.today(), self.get_app_time())
+        task_to_enter = Task('Test title', 'Test description', date.today(), 'Critical', self.get_app_time())
 
         available_tasks = (LoginPage
                            .open()

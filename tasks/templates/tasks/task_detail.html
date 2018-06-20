@@ -9,22 +9,40 @@
     {% else %}
         <h2 class="status_done">{{task.status}}</h2>
     {% endif %}
-    <h1 class="task_title" id="task_title_detail"><strong>{{ task.task_title }}</strong> </h1>
-    <p class="task_description" id="task_description">{{ task.task_description }}</p>
+    <div id="id_priorities">
+        {% if task.priorities == 'Minor' %}
+            <h2 class="minor">{{task.priorities}}</h2>
+        {% elif task.priorities == 'Normal' %}
+            <h2 class="normal">{{task.priorities}}</h2>
+        {% elif task.priorities == 'Major' %}
+            <h2 class="major">{{task.priorities}}</h2>
+        {% else %}
+            <h2 class="critical">{{task.priorities}}</h2>
+        {% endif %}
+    </div>
+    <label id="title_task">Task title:</label>
+    <h4 class="task_title" id="task_title_detail"><strong>{{ task.task_title }}</strong> </h4>
+    <hr>
+    <label id="description_task">Description of the task:</label>
+    <div class="task_description" id="task_description">{{ task.task_description }}</div>
+    <hr>
     <div class="time">
         {% if task.time_estimated %}
-            <p id="estimated">Estimation: {{ task.time_estimated|date:'M. d, Y' }}</p>
+        <label id="task_estimation">Estimation:</label>
+        <p id="estimated">{{ task.time_estimated|date:'M. d, Y' }}</p>
         {% endif%}
         {% if task.time_published %}
         <div class="date">
-            <p id="published_at">Published at: {{ task.time_published|date:'M. j, Y, h:i A' }}</p>
+            <label id="task_published">Published at:</label>
+            <p id="published_at">{{ task.time_published|date:'M. j, Y, h:i A' }}</p>
         </div>
         {% endif %}
         {% if task.time_edited %}
         <div class="edited_date">
-            <p id="edited_at">Edited at: {{ task.time_edited|date:'M. j, Y, h:i A' }}</p>
-        </div>
+            <label id="task_edited">Edited at: </label>
+            <p id="edited_at">{{ task.time_edited|date:'M. j, Y, h:i A' }}</p>
+            </div>
+        {% endif %}
     </div>
-    {% endif %}
 </div>
 {% endblock %}

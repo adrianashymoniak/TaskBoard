@@ -16,7 +16,7 @@ class HomePage:
         return CreateTaskPage()
 
     def open_task(self, task):
-        browser.element(by.xpath("//a[contains(text(),'{}')]".format(task.title))).click()
+        browser.element(by.xpath("//span[contains(text(),'{}')]".format(task.title))).click()
         return TaskDetailPage()
 
     def __parse_task_titles_by_css_selector(self, css_selector):

@@ -25,8 +25,8 @@ class BaseTest(TestCase):
             chrome_options.add_argument("--headless")
             chrome_options.add_argument("window-size=1024,768")
             chrome_options.add_argument("--no-sandbox")
-        # browser.set_driver(webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options))
-        browser.set_driver(webdriver.Chrome(options=chrome_options))
+        browser.set_driver(webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options))
+        # browser.set_driver(webdriver.Chrome(options=chrome_options))
 
     first_test_user = None
     second_test_user = None
@@ -47,7 +47,7 @@ class BaseTest(TestCase):
 
     def get_test_task(self, user):
         task = Task((str(datetime.now()) + ' Task title'), 'task description',
-                    date.today(), datetime.utcnow().replace(second=0, microsecond=0),
+                    date.today(), 'Critical', datetime.utcnow().replace(second=0, microsecond=0),
                     user_id=user.user_id)
         SQLHelper.create_task(task)
         return task

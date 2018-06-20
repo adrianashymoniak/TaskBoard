@@ -17,7 +17,8 @@ class SignUpForm(UserCreationForm):
 class TaskForm(forms.ModelForm):
     time_estimated = forms.DateField(required=False)
     status = forms.CharField(required=False)
+    priorities = forms.CharField(required=False)
 
     class Meta:
         model = Task
-        fields = ['task_title', 'task_description', 'time_estimated', 'status', ]
+        fields = ['task_title', 'task_description', 'time_estimated', 'status', 'priorities', ]

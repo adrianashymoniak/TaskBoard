@@ -1,7 +1,17 @@
 {% extends 'tasks/base.html' %}
+{% block title%}You are creating task {% endblock %}
 {% block body %}
 <form method="post">
     {% csrf_token %}
+    <div class="form-group-priorities">
+        <label for="id_priorities">Priority</label>
+        <select name="priorities" id="id_priorities" class="form-control">
+            <option value="Minor">Minor</option>
+            <option value="Normal" selected="selected">Normal</option>
+            <option value="Major">Major</option>
+            <option value="Critical">Critical</option>
+        </select>
+    </div>
     <div class="form-group-title">
         <label for="task_title">Task title</label>
         <input class="form-control" id="task_title" type="text" name="task_title" maxlength="150" required/>
