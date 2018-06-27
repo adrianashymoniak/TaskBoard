@@ -41,6 +41,17 @@ def create_task(request):
             task.status = 'New'
             task.save()
             return redirect('task_detail', pk=task.pk)
+        else:
+            task = Task()
+            task.priorities = request.POST["priorities"]
+            task.task_title = request.POST["task_title"]
+            task.task_description = request.POST["task_description"]
+            estimated = request.POST['time_estimated']
+            if estimated:
+                task.time_estimated = datetime.strptime(estimated, '%Y-%m-%d').date()
+            else:
+                task.time_estimated = estimated
+            return render(request, 'tasks/create_task.html', {'form': form, 'task': task})
     else:
         form = TaskForm()
         return render(request, 'tasks/create_task.html', {'form': form})
@@ -63,14 +74,29 @@ def edit_task(request, pk):
             task.time_edited = datetime.now()
             task.save()
             return redirect('task_detail', pk=task.pk)
+        else:
+            task.status = request.POST['status']
+            task.priorities = request.POST['priorities']
+            task.task_title = request.POST['task_title']
+            task.task_description = request.POST['task_description']
+            estimated = request.POST['time_estimated']
+            if estimated:
+                task.time_estimated = datetime.strptime(estimated, '%Y-%m-%d').date()
+            else:
+                task.time_estimated = estimated
+            return render(request, 'tasks/edit_task.html', {'form': form, 'task': task})
     else:
         return render(request, 'tasks/edit_task.html', {'task': task})
 
 
 @login_required
 def delete_task(request, pk):
-    Task.objects.get(pk=pk).delete()
-    return redirect('home')
+    task = get_object_or_404(Task, pk=pk)
+    if task:
+        task.delete()
+        return redirect('home')
+    else:
+        return error_404(request, None)
 
 
 @login_required
@@ -84,6 +110,6 @@ def error_404(request, exception):
     return render(request, 'tasks/errors/404.html', data)
 
 
-def error_500(request, exception):
+def error_500(request):
     data = {}
     return render(request, 'tasks/errors/500.html', data)

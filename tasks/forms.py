@@ -15,6 +15,10 @@ class SignUpForm(UserCreationForm):
 
 
 class TaskForm(forms.ModelForm):
+    task_title = forms.CharField(
+        error_messages={'required': "This filed is required! Please fill the 'Task title' field."})
+    task_description = forms.CharField(
+        error_messages={'required': "This filed is required! Please fill the 'Task description' field."})
     time_estimated = forms.DateField(required=False)
     status = forms.CharField(required=False)
     priorities = forms.CharField(required=False)
