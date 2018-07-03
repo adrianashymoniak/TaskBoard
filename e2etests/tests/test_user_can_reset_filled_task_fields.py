@@ -16,6 +16,7 @@ class UserCanResetFilledTaskFields(BaseTest):
                         .create_task()
                         .fill_task(task_to_enter)
                         .reset_task()
+                        .confirm_reseting()
                         .read_filled_task())
 
         self.assertEquals(len(entered_task.title), 0, "Title field not cleared")

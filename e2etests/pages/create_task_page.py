@@ -31,11 +31,19 @@ class CreateTaskPage:
         browser.element('#save_task').click()
         return TaskDetailPage()
 
+    def confirm_canceling(self):
+        browser.driver().switch_to.alert.accept()
+        from e2etests.pages.home_page import HomePage
+        return HomePage()
+
+    def confirm_reseting(self):
+        browser.driver().switch_to.alert.accept()
+        return self
+
     def reset_task(self):
         browser.element('#reset_fields').click()
         return self
 
     def cancel(self):
         browser.element('#home_page').click()
-        from e2etests.pages.home_page import HomePage
-        return HomePage()
+        return self

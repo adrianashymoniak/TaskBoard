@@ -3,11 +3,12 @@ import re
 from selene import browser
 from selene.support import by
 
+from e2etests.pages.confirm_task_deleting_page import ConfirmTaskDeletingPage
 from e2etests.pages.create_task_page import CreateTaskPage
 from e2etests.pages.task_detail_page import TaskDetailPage
 
 
-class HomePage:
+class HomePage(ConfirmTaskDeletingPage):
     def read_greeting(self):
         return browser.element('#greeting').text
 
@@ -33,10 +34,6 @@ class HomePage:
 
     def get_tasks_titles_in_status_done(self):
         return self.__parse_task_titles_by_css_selector('.column_name_done+.task_column #task_title')
-
-    def delete_all(self):
-        browser.element('#delete_all_tasks').click()
-        return self
 
     def logout(self):
         browser.element('#logout').click()

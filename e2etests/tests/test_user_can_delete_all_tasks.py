@@ -11,7 +11,8 @@ class UserCanDeleteAllTasks(BaseTest):
         available_tasks = (LoginPage
                            .open()
                            .login_as(user)
-                           .delete_all()
+                           .click_delete_all()
+                           .confirm_deleting()
                            .get_tasks_titles()
                            )
 

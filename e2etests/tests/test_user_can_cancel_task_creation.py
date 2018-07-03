@@ -16,6 +16,7 @@ class UserCanCancelTaskCreation(BaseTest):
                            .create_task()
                            .fill_task(task_to_enter)
                            .cancel()
+                           .confirm_canceling()
                            .get_tasks_titles())
 
         self.assertNotIn(task_to_enter.title, available_tasks, 'Task creation is not canceled')

@@ -3,10 +3,11 @@ from datetime import datetime
 from selene import browser
 
 from e2etests.domain.task import Task
+from e2etests.pages.delete_single_task_page import DeleteSingleTaskPage
 from e2etests.pages.edit_task_page import EditTaskPage
 
 
-class TaskDetailPage:
+class TaskDetailPage(DeleteSingleTaskPage):
     def edit_task(self):
         browser.element('#edit_task_task_detail').click()
         return EditTaskPage()
@@ -25,11 +26,6 @@ class TaskDetailPage:
         edited = browser.element('#edited_at').text.replace('Edited at: ', '')
         task.edited = datetime.strptime(edited, '%b. %d, %Y, %I:%M %p')
         return task
-
-    def delete_task(self):
-        browser.element('#delete_task_edit_page').click()
-        from e2etests.pages.home_page import HomePage
-        return HomePage()
 
     def get_tasks_titles(self):
         return [e.text for e in browser.elements('#task_title_detail')]

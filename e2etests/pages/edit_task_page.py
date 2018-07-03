@@ -1,8 +1,10 @@
 from selene import browser
 from selenium.webdriver.support.ui import Select
 
+from e2etests.pages.delete_single_task_page import DeleteSingleTaskPage
 
-class EditTaskPage:
+
+class EditTaskPage(DeleteSingleTaskPage):
     def edit(self, task=None):
         if task is not None:
             browser.element('#task_title').set_value(task.title)
@@ -17,11 +19,6 @@ class EditTaskPage:
         browser.element('#go_detail_page').click()
         from e2etests.pages.task_detail_page import TaskDetailPage
         return TaskDetailPage()
-
-    def delete_task(self):
-        browser.element('#delete_task_edit_page').click()
-        from e2etests.pages.home_page import HomePage
-        return HomePage()
 
     def select_status_by_visible_text(self, visible_text):
         select = Select(browser.element('#id_status'))

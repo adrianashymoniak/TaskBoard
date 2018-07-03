@@ -12,7 +12,8 @@ class UserCanDeleteTask(BaseTest):
                            .open()
                            .login_as(user)
                            .open_task(task_for_deleting)
-                           .delete_task()
+                           .click_delete_task()
+                           .confirm_deleting()
                            .get_tasks_titles())
 
         self.assertNotIn(task_for_deleting.title, available_tasks, 'Deleted task is still displayed on Home page')
