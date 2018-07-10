@@ -1,5 +1,5 @@
 class Task:
-    def __init__(self, title, description, estimated, priorities, published=None, edited=None, user_id=None, ):
+    def __init__(self, title, description, estimated, priorities, published=None, edited=None, user_id=None):
         self.title = title
         self.description = description
         self.estimated = estimated

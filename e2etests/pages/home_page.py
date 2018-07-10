@@ -2,6 +2,7 @@ import re
 
 from selene import browser
 from selene.support import by
+from selenium.common.exceptions import NoAlertPresentException
 
 from e2etests.pages.confirm_task_deleting_page import ConfirmTaskDeletingPage
 from e2etests.pages.create_task_page import CreateTaskPage
@@ -39,3 +40,13 @@ class HomePage(ConfirmTaskDeletingPage):
         browser.element('#logout').click()
         from e2etests.pages.login_page import LoginPage
         return LoginPage()
+
+    def is_alert_present(self):
+        try:
+            browser.driver().switch_to.alert
+            return True
+        except NoAlertPresentException:
+            return False
+
+    def is_opened(self):
+        return browser.elements('.task_column').size() == 3

@@ -1,11 +1,14 @@
+from datetime import datetime
+
 from selene import browser
 from selenium.webdriver.support.select import Select
 
 from e2etests.domain.task import Task
+from e2etests.pages.page_with_leave_message import PageWithLeaveMessage
 from e2etests.pages.task_detail_page import TaskDetailPage
 
 
-class CreateTaskPage:
+class CreateTaskPage(PageWithLeaveMessage):
     def __init__(self):
         self.title = browser.element('#task_title')
         self.description = browser.element('#task_description')
@@ -23,7 +26,9 @@ class CreateTaskPage:
         title = self.title.get_attribute("value")
         description = self.description.get_attribute("value")
         estimation = self.estimation.get_attribute("value")
-        priorities = self.priorities.first_selected_option
+        if estimation:
+            estimation = datetime.strptime(estimation, '%Y-%m-%d').date()
+        priorities = self.priorities.first_selected_option.text
         return Task(title, description, estimation, priorities)
 
     def save_task(self, task):
@@ -36,7 +41,7 @@ class CreateTaskPage:
         from e2etests.pages.home_page import HomePage
         return HomePage()
 
-    def confirm_reseting(self):
+    def confirm_resetting(self):
         browser.driver().switch_to.alert.accept()
         return self
 
@@ -44,6 +49,11 @@ class CreateTaskPage:
         browser.element('#reset_fields').click()
         return self
 
-    def cancel(self):
+    def click_on_task_board_link(self):
         browser.element('#home_page').click()
         return self
+
+    def click_on_task_board_link_without_modifying_fields(self):
+        self.click_on_task_board_link()
+        from e2etests.pages.home_page import HomePage
+        return HomePage()

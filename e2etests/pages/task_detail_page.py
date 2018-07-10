@@ -13,22 +13,23 @@ class TaskDetailPage(DeleteSingleTaskPage):
         return EditTaskPage()
 
     def read_task(self):
-        title = browser.element('#task_title_detail').text
+        title = self.read_task_title()
         description = browser.element('#task_description').text
         estimated = browser.element('#estimated').text.replace('Estimation: ', '')
         published = browser.element('#published_at').text.replace('Published at: ', '')
         priorities = browser.element('#id_priorities').text
-        return Task(title, description, datetime.strptime(estimated, '%b. %d, %Y').date(), priorities,
+
+        task = Task(title, description, datetime.strptime(estimated, '%b. %d, %Y').date(), priorities,
                     datetime.strptime(published, '%b. %d, %Y, %I:%M %p'))
 
-    def read_edited_task(self):
-        task = self.read_task()
-        edited = browser.element('#edited_at').text.replace('Edited at: ', '')
-        task.edited = datetime.strptime(edited, '%b. %d, %Y, %I:%M %p')
+        if browser.elements('#edited_at').size() == 1:
+            edited = browser.element('#edited_at').text.replace('Edited at: ', '')
+            task.edited = datetime.strptime(edited, '%b. %d, %Y, %I:%M %p')
+
         return task
 
-    def get_tasks_titles(self):
-        return [e.text for e in browser.elements('#task_title_detail')]
+    def read_task_title(self):
+        return browser.element('#task_title_detail').text
 
     def navigate_to_home_page(self):
         browser.element('#home_page').click()

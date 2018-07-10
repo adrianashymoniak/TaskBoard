@@ -7,3 +7,7 @@ class DeleteSingleTaskPage(ConfirmTaskDeletingPage):
     def click_delete_task(self):
         browser.element('#delete_task_edit_page').click()
         return self
+
+    def discard_deleting(self):
+        browser.driver().switch_to.alert.dismiss()
+        return self

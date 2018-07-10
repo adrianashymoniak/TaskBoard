@@ -54,10 +54,10 @@ class SQLHelper:
         connection = SQLHelper.create_connection()
         with connection:
             create_task_sql = ''' INSERT INTO tasks_task(task_title, task_description, time_published, time_edited, user_id, time_estimated, status, priorities)
-            VALUES(%s, %s, %s, NULL, %s, %s, 'New', 'Normal')'''
+            VALUES(%s, %s, %s, NULL, %s, %s, 'New', %s)'''
             cursor = connection.cursor()
             cursor.execute(create_task_sql,
-                           (task.title, task.description, task.published, task.user_id, task.estimated))
+                           (task.title, task.description, task.published, task.user_id, task.estimated, task.priorities))
 
     @staticmethod
     def delete_user(user):

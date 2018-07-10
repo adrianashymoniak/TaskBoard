@@ -15,7 +15,7 @@ class UserCanCancelTaskCreation(BaseTest):
                            .login_as(user)
                            .create_task()
                            .fill_task(task_to_enter)
-                           .cancel()
+                           .click_on_task_board_link()
                            .confirm_canceling()
                            .get_tasks_titles())
 
