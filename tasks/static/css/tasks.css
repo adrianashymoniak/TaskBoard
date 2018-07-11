@@ -198,3 +198,23 @@ textarea {
     margin-top: 50px;
     padding-top: 10px;
 }
+
+.task_in_time {
+    margin-left: 30px;
+    color: green;
+}
+
+.task_near_end_estimation {
+    margin-left: 30px;
+    color: orange;
+}
+
+.task_over_estimation {
+    margin-left: 30px;
+    color: red;
+}
+
+.task_estimation_none {
+    margin-left: 30px;
+    color: grey;
+}

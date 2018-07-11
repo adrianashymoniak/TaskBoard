@@ -44,5 +44,16 @@
             </div>
         {% endif %}
     </div>
+    <br />
+    {% if task.delta > 2 and task.status != 'Done' %}
+        <p class="task_in_time">You have {{ task.delta }} day(s) to finish this task in time!</p>
+    {% elif task.delta <= 2 and task.delta >= 0 and task.status != 'Done' %}
+        <p class="task_near_end_estimation">You have {{ task.delta }} day(s) to finish your task in time!</p>
+    {% elif task.delta < 0 and task.status != 'Done' %}
+        <p class="task_over_estimation">You are not in time with this task. You have  underestimate by {{ task.delta }} day(s)!</p>
+    {% elif task.delta is None and task.status != 'Done' %}
+        <p class="task_estimation_none">You didn't set any estimation to this task.</p>
+    {% endif %}
+
 </div>
 {% endblock %}
