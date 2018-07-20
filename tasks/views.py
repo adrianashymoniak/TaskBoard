@@ -1,10 +1,11 @@
 from datetime import datetime
 
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, redirect, get_object_or_404
 
-from .forms import SignUpForm, TaskForm
+from .forms import SignUpForm, TaskForm, EditProfileForm
 from .models import Task
 
 
@@ -110,7 +111,7 @@ def delete_task(request, pk):
 
 
 @login_required
-def delete_all(request):
+def delete_all_tasks(request):
     Task.objects.filter(user_id=request.user).delete()
     return redirect('home')
 
@@ -123,3 +124,41 @@ def error_404(request, exception):
 def error_500(request):
     data = {}
     return render(request, 'tasks/errors/500.html', data)
+
+
+@login_required
+def view_profile(request):
+    args = {'user': request.user}
+    return render(request, 'tasks/profile.html', args)
+
+
+@login_required
+def edit_profile(request):
+    if request.method == "POST":
+        form = EditProfileForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('view_profile')
+    else:
+        form = EditProfileForm(instance=request.user)
+    return render(request, 'tasks/edit_profile.html', {'form': form})
+
+
+@login_required
+def change_password(request):
+    if request.method == "POST":
+        form = PasswordChangeForm(data=request.POST, user=request.user)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            return redirect('view_profile')
+    else:
+        form = PasswordChangeForm(user=request.user)
+    return render(request, 'tasks/change_password.html', {'form': form})
+
+
+@login_required
+def delete_account(request):
+    delete_all_tasks(request)
+    request.user.delete()
+    return redirect('login')

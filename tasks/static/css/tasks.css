@@ -13,7 +13,7 @@
     margin-right: auto;
 }
 
-.username, .password, .sign_up_fields, .btn.btn-primary {
+.username, .password, .sign_up_fields, .btn.btn-primary, #id_username, #id_first_name, #id_last_name, #id_email, #id_old_password, #id_new_password1, #id_new_password2 {
     margin-top: auto;
     margin-left: auto;
     margin-right: auto;
@@ -51,6 +51,7 @@
     margin-bottom: 20px;
     width: 200px;
 }
+
 #save_task, #edit_task {
     background-color: #269622;
     border-color: #269622;
@@ -62,11 +63,11 @@
 }
 
 textarea {
-   resize: none;
+    resize: none;
 }
 
 .column {
-    float:left;
+    float: left;
     width: 33%;
     padding: 30px;
 
@@ -77,23 +78,25 @@ textarea {
         width: 100%;
     }
 }
-.column_name_new{
+
+.column_name_new {
     text-align: center;
     background: #495a77;
     color: #ffffff;
 }
-
 
 .column_name_in_progress {
     text-align: center;
     background: #ce8d00;
     color: #ffffff;
 }
+
 .column_name_done {
     text-align: center;
     background: #51c944;
     color: #ffffff;
 }
+
 .status_new {
     display: inline-block;
     float: left;
@@ -104,6 +107,7 @@ textarea {
     background: #495a77;
     color: #ffffff;
 }
+
 .status_in_progress {
     display: inline-block;
     float: left;
@@ -114,6 +118,7 @@ textarea {
     background: #ce8d00;
     color: #ffffff;
 }
+
 .status_done {
     display: block;
     float: left;
@@ -124,6 +129,7 @@ textarea {
     background: #51c944;
     color: #ffffff;
 }
+
 .minor {
     display: inline-block;
     margin-left: 30px;
@@ -133,6 +139,7 @@ textarea {
     background: #969696;
     color: #ffffff;
 }
+
 .normal {
     display: inline-block;
     margin-left: 30px;
@@ -142,6 +149,7 @@ textarea {
     background: #6d6fa5;
     color: #ffffff;
 }
+
 .major {
     display: inline-block;
     margin-left: 30px;
@@ -151,6 +159,7 @@ textarea {
     background: #964646;
     color: #ffffff;
 }
+
 .critical {
     display: inline-block;
     margin-left: 30px;
@@ -168,7 +177,6 @@ textarea {
     color: #337ab7;
 }
 
-
 .task_column a {
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -178,16 +186,15 @@ textarea {
     margin-right: 10%;
 }
 
-
-.task_description, .time, #description_task, #title_task,  #estimated, #published_at, #edited_at {
+.task_description, .time, #description_task, #title_task, #estimated, #published_at, #edited_at, .profile {
     display: block;
     margin-top: 10px;
     margin-bottom: 10px;
     padding-left: 30px;
     text-align: justify;
 
-
 }
+
 .task_description, .task_title {
     margin-left: 30px;
     padding-left: 30px;
@@ -217,4 +224,46 @@ textarea {
 .task_estimation_none {
     margin-left: 30px;
     color: grey;
+}
+
+.dropbtn {
+    background-color: #222;
+    color: #9d9d9d;
+    padding: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: auto;
+    background-color: #222;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: #9d9d9d;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    color: white;
 }

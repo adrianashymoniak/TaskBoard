@@ -67,7 +67,7 @@ $("[name='edit_form']").change(function() {
 
 $(window).bind('beforeunload', function(){
     if (!isEditButtonClicked && isSomethingChanged) {
-        return '';
+        return 'Leave the site?';
     }
 });
 </script>

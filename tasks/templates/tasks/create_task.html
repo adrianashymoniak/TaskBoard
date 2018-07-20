@@ -62,7 +62,7 @@ $("[name='create_form']").change(function() {
 
 $(window).bind('beforeunload', function(){
     if (!isSaveButtonClicked && isSomethingChanged) {
-        return '';
+        return 'Leave the site?';
     }
 });
 </script>

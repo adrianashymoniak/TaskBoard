@@ -1,0 +1,27 @@
+{% extends 'tasks/base.html' %}
+{% block title %}Profile{% endblock %}
+{% block body %}
+    <form method='post'>
+        {% csrf_token %}
+        <div class="profile">
+            <label>Username:</label>
+            <p> {{ user.username }}</p>
+            <hr>
+            {% if user.first_name != '' %}
+                <label>First name:</label>
+                <p>{{ user.first_name }}</p>
+                <hr>
+            {% endif %}
+            {% if user.last_name != '' %}
+                <label>Last name:</label>
+                <p>{{ user.last_name }}</p>
+                <hr>
+            {% endif %}
+            {% if user.email != '' %}
+                <label>Email:</label>
+                <p>{{ user.email }}</p>
+                <hr>
+            {% endif %}
+        </div>
+    </form>
+{% endblock %}
