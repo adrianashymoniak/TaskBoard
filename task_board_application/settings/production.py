@@ -1,5 +1,6 @@
 from .base import *
 import dj_database_url
+from .emailer_settings import *
 
 ENVIRONMENT = 'production'
 DEBUG = False
