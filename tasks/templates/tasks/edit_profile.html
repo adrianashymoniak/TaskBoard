@@ -1,5 +1,5 @@
 {% extends 'tasks/base.html' %}
-{% block title %}Profile{% endblock %}
+{% block title %}Edit profile information for "{{ user.username }}" account {% endblock %}
 {% block body %}
     <form method='post'>
         {% csrf_token %}

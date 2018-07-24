@@ -13,7 +13,7 @@
     margin-right: auto;
 }
 
-.username, .password, .sign_up_fields, .btn.btn-primary, #id_username, #id_first_name, #id_last_name, #id_email, #id_old_password, #id_new_password1, #id_new_password2 {
+.username, .password, .sign_up_fields, .btn.btn-primary, #id_username, #id_first_name, #id_last_name, #id_email, #id_old_password, #id_new_password1, #id_new_password2, .reset_password, .changing_password {
     margin-top: auto;
     margin-left: auto;
     margin-right: auto;
@@ -266,4 +266,9 @@ textarea {
 
 .dropdown:hover .dropbtn {
     color: white;
+}
+
+.password_reset_done_message, .password_reset_complete {
+    display: block;
+    margin: 40px;
 }
