@@ -130,3 +130,9 @@ STATICFILES_DIRS = (
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+EMAIL_HOST = os.environ.get('EMAIL_HOST_VAR')
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER_VAR')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD_VAR')
