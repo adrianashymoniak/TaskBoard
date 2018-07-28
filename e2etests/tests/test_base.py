@@ -30,6 +30,7 @@ class BaseTest(TestCase):
 
     first_test_user = None
     second_test_user = None
+    third_test_user = None
 
     def get_first_test_user(self):
         if BaseTest.first_test_user is None:
@@ -44,6 +45,13 @@ class BaseTest(TestCase):
             user.user_id = SQLHelper.create_user_if_not_present(user)
             BaseTest.second_test_user = user
         return BaseTest.second_test_user
+
+    def get_third_test_user(self):
+        if BaseTest.third_test_user is None:
+            user = User('third_test_user', 'admin123')
+            user.user_id = SQLHelper.create_user_if_not_present(user)
+            BaseTest.third_test_user = user
+        return BaseTest.third_test_user
 
     def get_test_task(self, user):
         task = Task((str(datetime.now()) + ' Task title'), 'task description',
@@ -63,3 +71,6 @@ class BaseTest(TestCase):
     def open_incorrect_url(self, incorrect_url):
         browser.open_url(incorrect_url)
         return PageNotFoundPage()
+
+    def assertObjectsEqual(self, first_object, second_object, message):
+        return self.assertDictEqual(vars(first_object), vars(second_object), message)

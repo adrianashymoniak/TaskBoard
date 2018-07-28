@@ -1,7 +1,7 @@
 {% extends 'tasks/base.html' %}
 {% block title %}Edit profile information for "{{ user.username }}" account {% endblock %}
 {% block body %}
-    <form method='post'>
+    <form method='post' name="edit_profile_form">
         {% csrf_token %}
         <div class="alignment">
             <input class="form-control" id="id_username" type="text" name="username" maxlength="30"
@@ -15,4 +15,24 @@
             <button class="btn btn-primary" id="submit_btn" type="submit">Submit</button>
         </div>
     </form>
+    <script>
+        var isSubmitButtonClicked = false;
+
+        var isSomethingChanged = false;
+
+        $("#submit_btn").click(function () {
+            isSubmitButtonClicked = true;
+        });
+
+        $("[name='edit_profile_form']").change(function () {
+            isSomethingChanged = true;
+        });
+
+        $(window).bind('beforeunload', function () {
+            if (!isSubmitButtonClicked && isSomethingChanged) {
+                return 'Leave the site?';
+            }
+        });
+    </script>
+
 {% endblock %}

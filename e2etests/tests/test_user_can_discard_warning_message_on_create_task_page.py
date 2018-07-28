@@ -19,4 +19,4 @@ class TestUserCanDiscardWarningMessageOnCreateTaskPage(BaseTest):
                         .discard_leaving()
                         .read_filled_task())
 
-        self.assertEqual(entered_task, task_to_enter, 'Entered task was cleared')
+        self.assertObjectsEqual(entered_task, task_to_enter, 'Entered task was cleared')

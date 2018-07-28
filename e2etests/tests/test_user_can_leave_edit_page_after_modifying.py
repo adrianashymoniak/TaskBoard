@@ -25,4 +25,4 @@ class TestUserCanLeaveEditPageAfterModifying(BaseTest):
                        .confirm_leaving_to_task_detail_page()
                        .read_task())
 
-        self.assertEqual(test_task, actual_task, 'Task was edited')
+        self.assertObjectsEqual(test_task, actual_task, 'Task was edited')

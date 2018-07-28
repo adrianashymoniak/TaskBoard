@@ -10,5 +10,5 @@ class UserCanSeePageNotFoundError(BaseTest):
         actual_error_message = self.open_incorrect_url('/creates').read_error_message()
 
         expected_error_message = 'No such page. Please go to Home page!'
-        self.assertEqual(expected_error_message, actual_error_message,
-                         'Error message is not displayed after incorrect redirection')
+        self.assertObjectsEqual(expected_error_message, actual_error_message,
+                                'Error message is not displayed after incorrect redirection')

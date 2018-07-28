@@ -57,7 +57,9 @@ class SQLHelper:
             VALUES(%s, %s, %s, NULL, %s, %s, 'New', %s)'''
             cursor = connection.cursor()
             cursor.execute(create_task_sql,
-                           (task.title, task.description, task.published, task.user_id, task.estimated, task.priorities))
+                           (
+                               task.title, task.description, task.published, task.user_id, task.estimated,
+                               task.priorities))
 
     @staticmethod
     def delete_user(user):
@@ -74,3 +76,11 @@ class SQLHelper:
             delete_task_sql = ''' DELETE FROM tasks_task WHERE user_id = %s '''
             cursor = connection.cursor()
             cursor.execute(delete_task_sql, (user.user_id,))
+
+    @staticmethod
+    def change_user_password(user):
+        connection = SQLHelper.create_connection()
+        with connection:
+            change_password_sql = '''UPDATE auth_user SET password = %s WHERE username = %s'''
+            cursor = connection.cursor()
+            cursor.execute(change_password_sql, (PBKDF2PasswordHasher().encode(user.password, 'salt'), user.username,))

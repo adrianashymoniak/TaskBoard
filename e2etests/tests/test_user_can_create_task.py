@@ -14,4 +14,5 @@ class UserCanCreateTask(BaseTest):
                        .create_task()
                        .save_task(expected_task)
                        .read_task())
-        self.assertEqual(expected_task, actual_task, 'Created task is not displayed as expected on Task Details page')
+        self.assertObjectsEqual(expected_task, actual_task,
+                                'Created task is not displayed as expected on Task Details page')

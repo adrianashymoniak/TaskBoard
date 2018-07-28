@@ -19,4 +19,5 @@ class UserCanEditTask(BaseTest):
                        .fill_edited_task(expected_task)
                        .edit()
                        .read_task())
-        self.assertEqual(expected_task, actual_task, 'Edited task is not displayed as expected on Task Details page')
+        self.assertObjectsEqual(expected_task, actual_task,
+                                'Edited task is not displayed as expected on Task Details page')

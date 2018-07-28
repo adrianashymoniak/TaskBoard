@@ -10,5 +10,5 @@ class UserCannotSeePagesBeforeLoginToApplication(BaseTest):
 
         expected_error_message = 'You should be logged in to see that page. Please go to Login page or to Sign up page!'
 
-        self.assertEqual(expected_error_message, actual_error_message,
-                         'Error message is not displayed after incorrect redirection')
+        self.assertObjectsEqual(expected_error_message, actual_error_message,
+                                'Error message is not displayed after incorrect redirection')

@@ -15,5 +15,5 @@ class LoginPage:
         browser.element('#login_btn').click()
         return HomePage()
 
-    def is_signoup_link_displayed(self):
+    def is_signup_link_displayed(self):
         return browser.element('#signup').text

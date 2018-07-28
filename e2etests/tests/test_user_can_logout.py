@@ -8,6 +8,6 @@ class UserCanLogout(BaseTest):
                 .open()
                 .login_as(self.get_first_test_user())
                 .logout()
-                .is_signoup_link_displayed())
+                .is_signup_link_displayed())
 
         self.assertTrue(link, "User not logged out")

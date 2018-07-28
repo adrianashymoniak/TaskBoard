@@ -3,7 +3,9 @@ import re
 from selene import browser
 from selene.support import by
 from selenium.common.exceptions import NoAlertPresentException
+from selenium.webdriver import ActionChains
 
+from e2etests.pages.change_password_page import ChangePasswordPage
 from e2etests.pages.confirm_task_deleting_page import ConfirmTaskDeletingPage
 from e2etests.pages.create_task_page import CreateTaskPage
 from e2etests.pages.task_detail_page import TaskDetailPage
@@ -50,3 +52,25 @@ class HomePage(ConfirmTaskDeletingPage):
 
     def is_opened(self):
         return browser.elements('.task_column').size() == 3
+
+    def open_profile_dropdown(self):
+        greeting = browser.element('#greeting')
+        ActionChains(browser.driver()).move_to_element(greeting.get_actual_webelement()).perform()
+        return self
+
+    def open_edit_profile(self):
+        self.open_profile_dropdown()
+        browser.element('#id_edit_profile').click()
+        from e2etests.pages.edit_profile_page import EditProfilePage
+        return EditProfilePage()
+
+    def open_change_password(self):
+        self.open_profile_dropdown()
+        browser.element('#id_change_password').click()
+        return ChangePasswordPage()
+
+    def open_view_profile(self):
+        self.open_profile_dropdown()
+        browser.element('#id_view_profile').click()
+        from e2etests.pages.view_profile_page import ViewProfilePage
+        return ViewProfilePage()

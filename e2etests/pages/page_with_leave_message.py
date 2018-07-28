@@ -19,3 +19,12 @@ class PageWithLeaveMessage:
         browser.driver().switch_to.alert.accept()
         from e2etests.pages.task_detail_page import TaskDetailPage
         return TaskDetailPage()
+
+    def confirm_leaving_to_home_page(self):
+        browser.driver().switch_to.alert.accept()
+        from e2etests.pages.home_page import HomePage
+        return HomePage()
+
+    def navigate_to_home_page(self):
+        browser.element('#home_page').click()
+        return self
