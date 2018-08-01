@@ -1,17 +1,15 @@
-from selene import browser
+from e2etests.pages.base_page import BasePage
 
 
-class ConfirmTaskDeletingPage:
+class ConfirmTaskDeletingPage(BasePage):
     def confirm_deleting(self):
-        browser.driver().switch_to.alert.accept()
-        from e2etests.pages.home_page import HomePage
-        return HomePage()
+        self.accept_alert()
+        return self.home_page()
 
     def discard_deleting(self):
-        browser.driver().switch_to.alert.dismiss()
-        from e2etests.pages.home_page import HomePage
-        return HomePage()
+        self.dismiss_alert()
+        return self
 
     def click_delete_all(self):
-        browser.element('#delete_all_tasks').click()
+        self.click('#delete_all_tasks')
         return self

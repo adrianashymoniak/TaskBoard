@@ -1,30 +1,27 @@
-from selene import browser
+from e2etests.pages.base_page import BasePage
 
 
-class PageWithLeaveMessage:
+class PageWithLeaveMessage(BasePage):
     def navigate_to_task_detail_page_with_message(self):
-        browser.element('#go_detail_page').click()
+        self.click('#go_detail_page')
         return self
 
     def navigate_to_task_detail_page_without_message(self):
-        browser.element('#go_detail_page').click()
-        from e2etests.pages.task_detail_page import TaskDetailPage
-        return TaskDetailPage()
+        self.click('#go_detail_page')
+        return self.task_detail_page()
 
     def discard_leaving(self):
-        browser.driver().switch_to.alert.dismiss()
+        self.dismiss_alert()
         return self
 
     def confirm_leaving_to_task_detail_page(self):
-        browser.driver().switch_to.alert.accept()
-        from e2etests.pages.task_detail_page import TaskDetailPage
-        return TaskDetailPage()
+        self.accept_alert()
+        return self.task_detail_page()
 
     def confirm_leaving_to_home_page(self):
-        browser.driver().switch_to.alert.accept()
-        from e2etests.pages.home_page import HomePage
-        return HomePage()
+        self.accept_alert()
+        return self.home_page()
 
     def navigate_to_home_page(self):
-        browser.element('#home_page').click()
+        self.click('#home_page')
         return self

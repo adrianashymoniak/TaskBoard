@@ -1,19 +1,12 @@
-from selene import browser
-
-from e2etests.pages.home_page import HomePage
+from e2etests.pages.base_page import BasePage
 
 
-class LoginPage:
-    @staticmethod
-    def open():
-        browser.open_url('/')
-        return LoginPage()
-
+class LoginPage(BasePage):
     def login_as(self, user):
-        browser.element('#id_username').set_value(user.username)
-        browser.element('#id_password').set_value(user.password)
-        browser.element('#login_btn').click()
-        return HomePage()
+        self.set_value('#id_username', user.username)
+        self.set_value('#id_password', user.password)
+        self.click('#login_btn')
+        return self.home_page()
 
     def is_signup_link_displayed(self):
-        return browser.element('#signup').text
+        return self.is_element_displayed('#signup')

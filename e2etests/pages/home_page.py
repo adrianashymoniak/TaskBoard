@@ -1,30 +1,22 @@
 import re
 
-from selene import browser
-from selene.support import by
-from selenium.common.exceptions import NoAlertPresentException
-from selenium.webdriver import ActionChains
-
-from e2etests.pages.change_password_page import ChangePasswordPage
 from e2etests.pages.confirm_task_deleting_page import ConfirmTaskDeletingPage
-from e2etests.pages.create_task_page import CreateTaskPage
-from e2etests.pages.task_detail_page import TaskDetailPage
 
 
 class HomePage(ConfirmTaskDeletingPage):
     def read_greeting(self):
-        return browser.element('#greeting').text
+        return self.read_text('#greeting')
 
     def create_task(self):
-        browser.element('#create_task').click()
-        return CreateTaskPage()
+        self.click('#create_task')
+        return self.create_task_page()
 
     def open_task(self, task):
-        browser.element(by.xpath("//span[contains(text(),'{}')]/ancestor::a".format(task.title))).click()
-        return TaskDetailPage()
+        self.click_by_xpath("//span[contains(text(),'{}')]/ancestor::a", task.title)
+        return self.task_detail_page()
 
     def __parse_task_titles_by_css_selector(self, css_selector):
-        return [re.sub("#(\d)+: ", "", e.text) for e in browser.elements(css_selector)]
+        return [re.sub("#(\d)+: ", "", t) for t in self.read_texts(css_selector)]
 
     def get_tasks_titles(self):
         return self.__parse_task_titles_by_css_selector('#task_title')
@@ -39,38 +31,27 @@ class HomePage(ConfirmTaskDeletingPage):
         return self.__parse_task_titles_by_css_selector('.column_name_done+.task_column #task_title')
 
     def logout(self):
-        browser.element('#logout').click()
-        from e2etests.pages.login_page import LoginPage
-        return LoginPage()
-
-    def is_alert_present(self):
-        try:
-            browser.driver().switch_to.alert
-            return True
-        except NoAlertPresentException:
-            return False
+        self.click('#logout')
+        return self.login_page()
 
     def is_opened(self):
-        return browser.elements('.task_column').size() == 3
+        return self.get_elements_count('.task_column') == 3
 
     def open_profile_dropdown(self):
-        greeting = browser.element('#greeting')
-        ActionChains(browser.driver()).move_to_element(greeting.get_actual_webelement()).perform()
+        self.move_to_element('#greeting')
         return self
 
     def open_edit_profile(self):
         self.open_profile_dropdown()
-        browser.element('#id_edit_profile').click()
-        from e2etests.pages.edit_profile_page import EditProfilePage
-        return EditProfilePage()
+        self.click('#id_edit_profile')
+        return self.edit_pofile_page()
 
     def open_change_password(self):
         self.open_profile_dropdown()
-        browser.element('#id_change_password').click()
-        return ChangePasswordPage()
+        self.click('#id_change_password')
+        return self.change_password_page()
 
     def open_view_profile(self):
         self.open_profile_dropdown()
-        browser.element('#id_view_profile').click()
-        from e2etests.pages.view_profile_page import ViewProfilePage
-        return ViewProfilePage()
+        self.click('#id_view_profile')
+        return self.view_profile_page()

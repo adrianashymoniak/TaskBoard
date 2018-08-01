@@ -1,6 +1,6 @@
-from selene import browser
+from e2etests.pages.base_page import BasePage
 
 
-class PageNotFoundPage:
+class PageNotFoundPage(BasePage):
     def read_error_message(self):
-        return browser.element('#page_not_found').text
+        return self.read_text('#page_not_found')

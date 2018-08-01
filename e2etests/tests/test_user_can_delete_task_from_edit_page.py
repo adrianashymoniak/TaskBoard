@@ -1,4 +1,3 @@
-from e2etests.pages.login_page import LoginPage
 from e2etests.tests.test_base import BaseTest
 
 
@@ -8,11 +7,7 @@ class UserCanDeleteTaskFromEditPage(BaseTest):
         task_for_deleting = self.get_test_task(user)
         additional_task = self.get_test_task(user)
 
-        available_tasks = (LoginPage
-                           .open()
-                           .login_as(user)
-                           .open_task(task_for_deleting)
-                           .edit_task()
+        available_tasks = (self.edit_task_for_user(user, task_for_deleting)
                            .click_delete_task()
                            .confirm_deleting()
                            .get_tasks_titles())

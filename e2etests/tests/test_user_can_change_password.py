@@ -1,5 +1,4 @@
 from e2etests.domain.user import User
-from e2etests.pages.login_page import LoginPage
 from e2etests.pages.view_profile_page import ViewProfilePage
 from e2etests.tests.test_base import BaseTest
 from e2etests.util.sql_helper import SQLHelper
@@ -10,10 +9,7 @@ class UserCanChangePassword(BaseTest):
         self.test_user = self.get_first_test_user()
         new_password = 'qazwsx123'
 
-        login = LoginPage.open()
-
-        username = (login.login_as(self.test_user)
-                    .open_profile_dropdown()
+        username = (self.login_as(self.test_user)
                     .open_change_password()
                     .fill_new_password(self.test_user.password, new_password)
                     .navigate_to_home_page()
@@ -22,13 +18,13 @@ class UserCanChangePassword(BaseTest):
                     .read_user_name()
                     )
 
-        self.assertEquals(self.test_user.username, username, "User is logged out")
+        self.assertEqual(self.test_user.username, username, "User is logged out")
 
         ViewProfilePage().logout()
 
         user_with_changed_password = User(username=self.test_user.username, password=new_password)
 
-        greeting = login.login_as(user_with_changed_password).read_greeting()
+        greeting = self.login_as(user_with_changed_password).read_greeting()
 
         self.assertIn(user_with_changed_password.username, greeting, "User not logged in")
 

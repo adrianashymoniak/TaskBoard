@@ -34,4 +34,4 @@
 #####End to end tests
 * Run command **pip install git+https://github.com/yashaka/selene.git** for installing Selene framework
 * Run command **pip install psycopg2-binary** for installing Psycopg (for creating connection to db)
-* Run tests with **python -m unittest discover e2etests** (chrome should be installed)
+* Run tests with **python -m unittest discover e2etests -v** (chrome should be installed)

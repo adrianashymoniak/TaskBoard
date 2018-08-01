@@ -1,17 +1,15 @@
-from selene import browser
+from e2etests.pages.base_page import BasePage
 
 
-class DeleteUserAccountPage:
+class DeleteUserAccountPage(BasePage):
     def click_delete_user_account(self):
-        browser.element('#delete_user').click()
+        self.click('#delete_user')
         return self
 
     def confirm_deleting_account(self):
-        browser.driver().switch_to.alert.accept()
-        from e2etests.pages.login_page import LoginPage
-        return LoginPage()
+        self.accept_alert()
+        return self.login_page()
 
     def discard_deleting_account(self):
-        browser.driver().switch_to.alert.dismiss()
-        from e2etests.pages.view_profile_page import ViewProfilePage
-        return ViewProfilePage()
+        self.dismiss_alert()
+        return self.view_profile_page()

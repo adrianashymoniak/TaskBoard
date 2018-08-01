@@ -6,3 +6,4 @@ DB_SETUP = {'database': '',
             'port': ''}
 HEADLESS = False
 APP_TIME_ZONE = ''
+AUTO_INSTALL_DRIVER = True

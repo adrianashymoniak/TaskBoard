@@ -1,4 +1,3 @@
-from e2etests.pages.login_page import LoginPage
 from e2etests.tests.test_base import BaseTest
 
 
@@ -7,7 +6,7 @@ class UserCanSeeTasksInDifferentStatusesOnHomePage(BaseTest):
         user = self.get_first_test_user()
         test_task = self.get_test_task(user)
 
-        home_page = LoginPage.open().login_as(user)
+        home_page = self.login_as(user)
         self.assert_task_in_new_column(home_page, test_task)
 
         home_page = self.change_task_status(home_page, test_task, 'In progress')

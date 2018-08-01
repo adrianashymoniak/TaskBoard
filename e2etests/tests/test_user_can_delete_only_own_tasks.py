@@ -1,4 +1,3 @@
-from e2etests.pages.login_page import LoginPage
 from e2etests.tests.test_base import BaseTest
 
 
@@ -10,9 +9,7 @@ class UserCanDeleteOnlyOwnTasks(BaseTest):
         second_user = self.get_second_test_user()
         second_user_test_task = self.get_test_task(second_user)
 
-        available_tasks_for_second_user = (LoginPage
-                                           .open()
-                                           .login_as(first_user)
+        available_tasks_for_second_user = (self.login_as(first_user)
                                            .click_delete_all()
                                            .confirm_deleting()
                                            .logout()

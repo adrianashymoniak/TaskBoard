@@ -1,7 +1,3 @@
-from datetime import date
-
-from e2etests.domain.task import Task
-from e2etests.pages.login_page import LoginPage
 from e2etests.tests.test_base import BaseTest
 
 
@@ -13,13 +9,9 @@ class TestUserCanLeaveEditPageAfterModifying(BaseTest):
         test_task.user_id = None
         test_task.published = self.get_app_time()
 
-        task_to_set = Task('Test title', 'Test description', date.today(), 'Major', self.get_app_time(),
-                           self.get_app_time())
-        actual_task = (LoginPage
-                       .open()
-                       .login_as(user)
-                       .open_task(test_task)
-                       .edit_task()
+        task_to_set = self.get_task_edited()
+
+        actual_task = (self.edit_task_for_user(user, test_task)
                        .fill_edited_task(task_to_set)
                        .navigate_to_task_detail_page_with_message()
                        .confirm_leaving_to_task_detail_page()
