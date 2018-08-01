@@ -21,7 +21,7 @@ pipelines:
           - pip
         script:
            - pip install -r requirements.txt
-           - echo -e "BASE_URL = '$STG_BASE_URL'\nDB_SETUP = {'database':'$STG_DB_NAME', 'user':'$STG_DB_USER', 'password':'$STG_DB_PASSWORD', 'host':'$STG_DB_HOST', 'port':'$STG_DB_PORT'}\nHEADLESS = True\nAPP_TIME_ZONE = 'Europe/Kiev'\n" > e2etests/configs.py
+           - echo -e "BASE_URL = '$STG_BASE_URL'\nDB_SETUP = {'database':'$STG_DB_NAME', 'user':'$STG_DB_USER', 'password':'$STG_DB_PASSWORD', 'host':'$STG_DB_HOST', 'port':'$STG_DB_PORT'}\nHEADLESS = True\nAPP_TIME_ZONE = 'Europe/Kiev'\nAUTO_INSTALL_DRIVER = False\n" > e2etests/configs.py
            - echo -e "EMAIL_HOST = '$EMAIL_HOST'\nEMAIL_USE_TLS = True\nEMAIL_PORT = 587\nEMAIL_HOST_USER = '$EMAIL_HOST_USER'\nEMAIL_HOST_PASSWORD = '$EMAIL_HOST_PASSWORD'\n" > task_board_application/settings/emailer_settings.py
            - mkdir test-reports
            - nosetests --with-xunit -v -m "(tests)|(^test_user_can)" --xunit-file=./test-reports/nose-junit.xml
