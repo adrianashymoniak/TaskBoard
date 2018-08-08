@@ -13,7 +13,7 @@ class TestUserCanDiscardDeletingAllTasks(BaseTest):
                            .get_tasks_titles())
 
         self.assertIn(first_test_task.title, available_tasks,
-                      'Tasks was deleted')
+                      'Tasks were deleted')
 
         self.assertIn(second_test_task.title, available_tasks,
-                      'Tasks was deleted')
+                      'Tasks were deleted')

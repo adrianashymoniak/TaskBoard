@@ -26,7 +26,7 @@ class UserCanChangePassword(BaseTest):
 
         greeting = self.login_as(user_with_changed_password).read_greeting()
 
-        self.assertIn(user_with_changed_password.username, greeting, "User not logged in")
+        self.assertIn(user_with_changed_password.username, greeting, "User is not logged in")
 
     def tearDown(self):
         super(UserCanChangePassword, self).tearDown()

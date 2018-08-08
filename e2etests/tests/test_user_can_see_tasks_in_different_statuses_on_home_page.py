@@ -1,4 +1,5 @@
 from e2etests.tests.test_base import BaseTest
+from e2etests.domain.task_statuses import TaskStatuses
 
 
 class UserCanSeeTasksInDifferentStatusesOnHomePage(BaseTest):
@@ -9,18 +10,18 @@ class UserCanSeeTasksInDifferentStatusesOnHomePage(BaseTest):
         home_page = self.login_as(user)
         self.assert_task_in_new_column(home_page, test_task)
 
-        home_page = self.change_task_status(home_page, test_task, 'In progress')
+        home_page = self.change_task_status(home_page, test_task, TaskStatuses.IN_PROGRESS)
         self.assert_task_in_in_progress_column(home_page, test_task)
 
-        home_page = self.change_task_status(home_page, test_task, 'Done')
+        home_page = self.change_task_status(home_page, test_task, TaskStatuses.DONE)
         self.assert_task_in_done_column(home_page, test_task)
 
-        home_page = self.change_task_status(home_page, test_task, 'New')
+        home_page = self.change_task_status(home_page, test_task, TaskStatuses.NEW)
         self.assert_task_in_new_column(home_page, test_task)
 
     def change_task_status(self, home_page, test_task, status):
         return (home_page.open_task(test_task).edit_task()
-                .select_status_by_visible_text(status).edit().navigate_to_home_page())
+                .select_status(status).edit().navigate_to_home_page())
 
     def assert_task_in_done_column(self, home_page, test_task):
         self.assertIn(test_task.title, home_page.get_tasks_titles_in_status_done(), 'Task is not in Done column')

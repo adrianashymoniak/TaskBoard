@@ -11,6 +11,7 @@ class UserCanResetFilledTaskFields(BaseTest):
                         .confirm_resetting()
                         .read_filled_task())
 
-        self.assertEqual(len(entered_task.title), 0, "Title field not cleared")
-        self.assertEqual(len(entered_task.description), 0, "Description field not cleared")
-        self.assertEqual(len(entered_task.estimated), 0, "Estimation field not cleared")
+        self.assertEqual(len(entered_task.title), 0, "Title field is not cleared")
+        self.assertEqual(len(entered_task.description), 0, "Description field is not cleared")
+        self.assertEqual(len(entered_task.estimated), 0, "Estimation field is not cleared")
+

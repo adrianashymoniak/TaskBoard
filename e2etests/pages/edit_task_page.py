@@ -16,6 +16,6 @@ class EditTaskPage(DeleteSingleTaskPage, PageWithLeaveMessage):
         self.click('#edit_task')
         return self.task_detail_page()
 
-    def select_status_by_visible_text(self, visible_text):
-        self.select('#id_status', visible_text)
+    def select_status(self, status):
+        self.select('#id_status', status.value)
         return self
