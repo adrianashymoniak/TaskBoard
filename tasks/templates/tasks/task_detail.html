@@ -1,6 +1,11 @@
 {% extends 'tasks/base.html' %}
+{% block styles %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/task_detail.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home_page.css' %}"/>
+{% endblock %}
 {% block title %} Task: '{{ task.task_title }}' {% endblock %}
-{% block body %}
+{% block authorized_user_content %}
 <div class="task">
     {% if task.status == 'New' %}
         <h2 class="status_new">{{task.status}}</h2>

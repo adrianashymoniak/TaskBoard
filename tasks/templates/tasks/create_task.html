@@ -1,69 +1,19 @@
 {% extends 'tasks/base.html' %}
-{% block title%}You are creating task {% endblock %}
-{% block body %}
-<form method="post" name="create_form">
-    {% csrf_token %}
-    <div class="form-group-priorities">
-        <label for="id_priorities">Priority</label>
-        <select name="priorities" id="id_priorities" class="form-control">
-            <option value="Minor" {% if task.priorities == "Minor" %}selected="selected"{% endif %}>Minor</option>
-            <option value="Normal" {% if task.priorities == "Normal" %}selected="selected"{% endif %} selected="selected">Normal</option>
-            <option value="Major" {% if task.priorities == "Major" %}selected="selected"{% endif %}>Major</option>
-            <option value="Critical" {% if task.priorities == "Critical" %}selected="selected"{% endif %}>Critical</option>
-        </select>
-    </div>
-    <div class="form-group-title">
-        <label for="task_title">Task title</label>
-        <input class="form-control" id="task_title" type="text" name="task_title" maxlength="150" value="{{ task.task_title }}"/>
-    </div>
-    <div class="form-group-description">
-        <label for="task_description">Task description</label>
-        <textarea class="form-control" rows="5" cols="50" id="task_description" name="task_description">{{ task.task_description }}</textarea>
-    </div>
-    <div class="form-group-time-estimation">
-        <label for="time_estimated">Time estimated</label>
-        <input class="form-control" id="time_estimated" type="date" name="time_estimated" value="{{ task.time_estimated|date:'Y-m-d'}}">
-    </div>
-    <div class="form-group-buttons">
-        <button id="save_task" type="submit" class="btn btn-primary">Save</button>
-        <a id="reset_fields" type="reset" class="btn btn-primary" href="{% url 'create_task' %}">Reset</a>
-    </div>
-    <div class="error_message">
-    {% if form.errors %}
-        {% for field in form %}
-            {% for error in field.errors %}
-                <div class="alert alert-danger fade in">
-                    <a href="#" class="close" data-dismiss="alert">&times;</a>
-                    <strong>{{ error|escape }}</strong>
-                </div>
-            {% endfor %}
-        {% endfor %}
-        {% for error in form.non_field_errors %}
-            <div class="alert alert-danger fade in">
-                <a href="#" class="close" data-dismiss="alert">&times;</a>
-                <strong>{{ error|escape }}</strong>
-            </div>
-        {% endfor %}
-    {% endif %}
-    </div>
-</form>
-<script>
-var isSaveButtonClicked = false;
-
-var isSomethingChanged = false;
-
-$("#save_task").click(function() {
-    isSaveButtonClicked = true;
-});
-
-$("[name='create_form']").change(function() {
-    isSomethingChanged = true;
-});
-
-$(window).bind('beforeunload', function(){
-    if (!isSaveButtonClicked && isSomethingChanged) {
-        return 'Leave the site?';
-    }
-});
-</script>
+{% block styles %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/error_message.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/edit_task_page.css' %}"/>
+{% endblock %}
+{% block title %}You are creating task {% endblock %}
+{% block authorized_user_content %}
+    <form method="post" name="create_form">
+        {% csrf_token %}
+        {% include 'tasks/templates_helpers/tasks_fields.html' %}
+        <div class="form-group-buttons">
+            <button id="save_task" type="submit" class="btn btn-primary">Save</button>
+            <a id="reset_fields" type="reset" class="btn btn-primary" href="{% url 'create_task' %}">Reset</a>
+        </div>
+        {% include 'tasks/templates_helpers/error_messages.html' %}
+    </form>
+    <script src="{% static 'js/create_task_warning.js' %}"></script>
 {% endblock %}

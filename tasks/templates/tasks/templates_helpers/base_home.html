@@ -1,14 +1,14 @@
- {% if task.priorities == 'Minor' %}
-    <img src="/static/images/minor.png" width="19" height="19">
-    <span>#{{task.pk}}: {{ task.task_title }}</span>
- {% elif task.priorities == 'Normal' %}
-    <img src="/static/images/normal.png" width="19" height="19">
-    <span>#{{task.pk}}: {{ task.task_title }}</span>
- {% elif task.priorities == 'Major' %}
-    <img src="/static/images/major.png" width="19" height="19">
-    <span>#{{task.pk}}: {{ task.task_title }}</span>
- {% else %}
-    <img src="/static/images/critical.png" width="19" height="19">
-    <span>#{{task.pk}}: {{ task.task_title }}</span>
- {% endif %}
+{% if task.priorities == 'Minor' %}
+    <img src="/static/images/minor.png" class="home_page_images">
+    <span>#{{ task.pk }}: {{ task.task_title }}</span>
+{% elif task.priorities == 'Normal' %}
+    <img src="/static/images/normal.png" class="home_page_images">
+    <span>#{{ task.pk }}: {{ task.task_title }}</span>
+{% elif task.priorities == 'Major' %}
+    <img src="/static/images/major.png" class="home_page_images">
+    <span>#{{ task.pk }}: {{ task.task_title }}</span>
+{% else %}
+    <img src="/static/images/critical.png" class="home_page_images">
+    <span>#{{ task.pk }}: {{ task.task_title }}</span>
+{% endif %}
 

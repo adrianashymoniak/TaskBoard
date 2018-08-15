@@ -1,0 +1,28 @@
+.form-control {
+    margin: auto auto 20px auto;
+}
+
+.form-group-title, .form-group-description, .form-group-buttons {
+    margin: auto 50px 20px 50px;
+    width: 60%;
+}
+
+.form-group-time-estimation, .form-group-status, #edit_task, .form-group-priorities {
+    margin: auto 50px 20px 50px;
+    width: 200px;
+}
+
+.btn.btn-primary {
+    width: 200px;
+}
+
+#save_task, #edit_task {
+    background-color: #269622;
+    border-color: #269622;
+}
+
+#reset_fields {
+    background-color: #a53d17;
+    border-color: #a53d17;
+}
+

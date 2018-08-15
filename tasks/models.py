@@ -17,6 +17,3 @@ class Task(models.Model):
     priorities = models.CharField(max_length=8,
                                   choices=(('Minor', 'minor'), ('Normal', 'normal'), ('Major', 'major'),
                                            ('Critical', 'critical'),), blank=True)
-
-    def __str__(self):
-        return self.task_title, self.task_description

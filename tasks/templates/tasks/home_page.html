@@ -1,6 +1,11 @@
 {% extends 'tasks/base.html' %}
+{% block styles %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home_page.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/task_detail.css' %}"/>
+{% endblock %}
 {% block title %}Home page{% endblock %}
-{% block body %}
+{% block authorized_user_content %}
     <div class="column">
         <h2 class="column_name_new">New</h2>
         <div class="task_column">

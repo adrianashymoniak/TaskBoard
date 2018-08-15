@@ -1,46 +1,35 @@
 {% extends 'tasks/base.html' %}
-
-
+{% block styles %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/account_pages_styles.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/error_message.css' %}"/>
+{% endblock %}
 {% if user.is_authenticated %}
-{% block body %}
-<p>You are already logged in. Please go to <a href="{% url 'home' %}">Home Page!</a></p>
-{% endblock %}
+    {% block authorized_user_content %}
+        <p>You are already logged in. Please go to <a href="{% url 'home' %}">Home Page!</a></p>
+    {% endblock %}
 {% else %}
-{% block title %} Login {% endblock %}
-{% block content %}
-<div class="alignment">
-    <h2>Login</h2>
-    <form method='post' autocomplete="off">
-        {% csrf_token %}
-        <div class="username">
-            <input autocomplete="off" class="form-control" type="text" name="username" autofocus="" maxlength="254" id="id_username"
-                   placeholder="Username" required="">
-        </div>
-        <div class="password">
-            <input autocomplete="off" class="form-control" type="password" name="password" id="id_password"
-                   placeholder="Password" required="">
-        </div>
-        <button id="login_btn" type="submit" class="btn btn-primary">Login</button><br><br>
-        <div class="error_message">
-        {% if form.errors %}
-            {% for field in form %}
-                {% for error in field.errors %}
-                    <div class="alert alert-danger fade in">
-                        <a href="#" class="close" data-dismiss="alert">&times;</a>
-                        <strong>{{ error|escape }}</strong>
-                    </div>
-                {% endfor %}
-            {% endfor %}
-            {% for error in form.non_field_errors %}
-                <div class="alert alert-danger fade in">
-                    <a href="#" class="close" data-dismiss="alert">&times;</a>
-                    <strong>{{ error|escape }}</strong>
+    {% block title %} Login {% endblock %}
+    {% block anonymous_user_content %}
+        <div class="alignment">
+            <h2 class="form_title">Login</h2>
+            <form method='post' autocomplete="off">
+                {% csrf_token %}
+                <div class="username">
+                    <input autocomplete="off" class="form-control" type="text" name="username" autofocus=""
+                           maxlength="254"
+                           id="id_username"
+                           placeholder="Username" required="">
                 </div>
-            {% endfor %}
-        {% endif %}
+                <div class="password">
+                    <input autocomplete="off" class="form-control" type="password" name="password" id="id_password"
+                           placeholder="Password" required="">
+                </div>
+                <button id="login_btn" type="submit" class="btn btn-primary">Login</button>
+                <div class="reset_password"><a href="password_reset">Reset password</a></div>
+                <br><br>
+            </form>
         </div>
-    </form>
-<a href="password_reset">Reset password</a>
-</div>
-{% endblock %}
+        {% include 'tasks/templates_helpers/error_messages.html' %}
+    {% endblock %}
 {% endif %}

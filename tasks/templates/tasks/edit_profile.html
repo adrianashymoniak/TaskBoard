@@ -1,6 +1,11 @@
 {% extends 'tasks/base.html' %}
+{% block styles %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/account_pages_styles.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/error_message.css' %}"/>
+{% endblock %}
 {% block title %}Edit profile information for "{{ user.username }}" account {% endblock %}
-{% block body %}
+{% block authorized_user_content %}
     <form method='post' name="edit_profile_form">
         {% csrf_token %}
         <div class="alignment">
@@ -14,25 +19,8 @@
                    value="{{ user.email }}">
             <button class="btn btn-primary" id="submit_btn" type="submit">Submit</button>
         </div>
+        {% include 'tasks/templates_helpers/error_messages.html' %}
     </form>
-    <script>
-        var isSubmitButtonClicked = false;
-
-        var isSomethingChanged = false;
-
-        $("#submit_btn").click(function () {
-            isSubmitButtonClicked = true;
-        });
-
-        $("[name='edit_profile_form']").change(function () {
-            isSomethingChanged = true;
-        });
-
-        $(window).bind('beforeunload', function () {
-            if (!isSubmitButtonClicked && isSomethingChanged) {
-                return 'Leave the site?';
-            }
-        });
-    </script>
-
+    <script src="{% static 'js/edit_profile_warning.js' %}"></script>
 {% endblock %}
+

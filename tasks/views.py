@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 from .forms import SignUpForm, TaskForm, EditProfileForm
 from .models import Task
+from .views_helpers import ViewsHelpers
 
 
 def signup(request):
@@ -29,7 +30,7 @@ def home(request):
     user = request.user
     tasks = Task.objects.filter(user=user).order_by('time_published')
     for task in tasks:
-        task.delta = calculation_delta(task)
+        task.delta = ViewsHelpers.calculation_delta(task)
     return render(request, 'tasks/home_page.html', {'tasks': tasks})
 
 
@@ -46,14 +47,7 @@ def create_task(request):
             return redirect('task_detail', pk=task.pk)
         else:
             task = Task()
-            task.priorities = request.POST["priorities"]
-            task.task_title = request.POST["task_title"]
-            task.task_description = request.POST["task_description"]
-            estimated = request.POST['time_estimated']
-            if estimated:
-                task.time_estimated = datetime.strptime(estimated, '%Y-%m-%d').date()
-            else:
-                task.time_estimated = estimated
+            ViewsHelpers.request_fields_data(request, task)
             return render(request, 'tasks/create_task.html', {'form': form, 'task': task})
     else:
         form = TaskForm()
@@ -63,15 +57,8 @@ def create_task(request):
 @login_required
 def task_detail(request, pk):
     task = get_object_or_404(Task, pk=pk)
-    task.delta = calculation_delta(task)
+    task.delta = ViewsHelpers.calculation_delta(task)
     return render(request, 'tasks/task_detail.html', {'task': task})
-
-
-def calculation_delta(task):
-    if task.time_estimated is None:
-        return None
-    else:
-        return (task.time_estimated - datetime.now().date()).days
 
 
 @login_required
@@ -87,14 +74,7 @@ def edit_task(request, pk):
             return redirect('task_detail', pk=task.pk)
         else:
             task.status = request.POST['status']
-            task.priorities = request.POST['priorities']
-            task.task_title = request.POST['task_title']
-            task.task_description = request.POST['task_description']
-            estimated = request.POST['time_estimated']
-            if estimated:
-                task.time_estimated = datetime.strptime(estimated, '%Y-%m-%d').date()
-            else:
-                task.time_estimated = estimated
+            ViewsHelpers.request_fields_data(request, task)
             return render(request, 'tasks/edit_task.html', {'form': form, 'task': task})
     else:
         return render(request, 'tasks/edit_task.html', {'task': task})

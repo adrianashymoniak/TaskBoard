@@ -1,0 +1,26 @@
+
+.alignment {
+    display: block;
+    margin: auto;
+    width: 250px;
+}
+
+input {
+    margin-bottom: 20px;
+
+}
+
+h2.form_title {
+    text-align: center;
+}
+
+button.btn.btn-primary {
+    width: 250px;
+}
+
+.reset_password {
+    text-align: center;
+    display: block;
+    padding-top: 20px;
+}
+

@@ -1,6 +1,10 @@
 {% extends 'tasks/base.html' %}
+{% block styles %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/task_detail.css' %}"/>
+{% endblock %}
 {% block title %}Profile: {{ user.username }}{% endblock %}
-{% block body %}
+{% block authorized_user_content %}
     <form method='post'>
         {% csrf_token %}
         <div class="profile">
