@@ -16,7 +16,7 @@ pipelines:
 
     - step:
         name: Run tests against test server
-        image: adrianashymoniak/3.6_selenium_chrome
+        image: adrianashymoniak/3.6_selenium_chrome:3.6_selenium_chrome
         caches:
           - pip
         script:
