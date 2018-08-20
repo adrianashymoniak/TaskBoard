@@ -24,6 +24,8 @@ pipelines:
            - echo -e "BASE_URL = '$STG_BASE_URL'\nDB_SETUP = {'database':'$STG_DB_NAME', 'user':'$STG_DB_USER', 'password':'$STG_DB_PASSWORD', 'host':'$STG_DB_HOST', 'port':'$STG_DB_PORT'}\nHEADLESS = True\nAPP_TIME_ZONE = 'Europe/Kiev'\nAUTO_INSTALL_DRIVER = False\n" > e2etests/configs.py
            - mkdir test-reports
            - nosetests --with-xunit -v -m "(tests)|(^test_user_can)" --xunit-file=./test-reports/nose-junit.xml
+           - pylint --load-plugins pylint_django [..other options..] ~/*/tasksboard/tasks --disable=missing-docstring
+           - pylint --load-plugins pylint_django [..other options..] ~/*/tasksboard/e2etests --disable=missing-docstring
 
     - step:
         name: Deploy to Heroku production server
