@@ -44,7 +44,7 @@ textarea {
     color: white;
 }
 
-.password_reset_done_message, .password_reset_complete {
+.password-reset-message {
     display: block;
     margin: 40px;
 }

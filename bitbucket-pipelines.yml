@@ -1,8 +1,3 @@
-# This is a sample build configuration for Python.
-# Check our guides at https://confluence.atlassian.com/x/x4UWN for more examples.
-# Only use spaces to indent your .yml configuration.
-# -----
-# You can specify a custom docker image from Docker Hub as your build environment.
 image: python:3.6.3
 clone:
   depth: full
@@ -15,6 +10,12 @@ pipelines:
           - git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$STG_HEROKU_APP_NAME.git HEAD
 
     - step:
+        name: Static Code Analysis
+        script:
+          - pylint --load-plugins pylint_django [..other options..] tasks --disable=missing-docstring
+          - pylint --load-plugins pylint_django [..other options..] e2etests --disable=missing-docstring
+
+    - step:
         name: Run tests against test server
         image: adrianashymoniak/python.3.6-selenium-chrome:3.6
         caches:
@@ -24,8 +25,6 @@ pipelines:
            - echo -e "BASE_URL = '$STG_BASE_URL'\nDB_SETUP = {'database':'$STG_DB_NAME', 'user':'$STG_DB_USER', 'password':'$STG_DB_PASSWORD', 'host':'$STG_DB_HOST', 'port':'$STG_DB_PORT'}\nHEADLESS = True\nAPP_TIME_ZONE = 'Europe/Kiev'\nAUTO_INSTALL_DRIVER = False\n" > e2etests/configs.py
            - mkdir test-reports
            - nosetests --with-xunit -v -m "(tests)|(^test_user_can)" --xunit-file=./test-reports/nose-junit.xml
-           - pylint --load-plugins pylint_django [..other options..] tasks --disable=missing-docstring
-           - pylint --load-plugins pylint_django [..other options..] e2etests --disable=missing-docstring
 
     - step:
         name: Deploy to Heroku production server

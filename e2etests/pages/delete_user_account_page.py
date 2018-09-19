@@ -3,7 +3,7 @@ from e2etests.pages.base_page import BasePage
 
 class DeleteUserAccountPage(BasePage):
     def click_delete_user_account(self):
-        self.click('#delete_user')
+        self.click('#delete-user')
         return self
 
     def confirm_deleting_account(self):

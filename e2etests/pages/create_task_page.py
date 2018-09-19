@@ -6,10 +6,10 @@ from e2etests.pages.page_with_leave_message import PageWithLeaveMessage
 
 class CreateTaskPage(PageWithLeaveMessage):
     def __init__(self):
-        self.title = '#task_title'
-        self.description = '#task_description'
-        self.estimation = '#time_estimated'
-        self.priorities = '#id_priorities'
+        self.title = '#task-title'
+        self.description = '#task-description'
+        self.estimation = '#time-estimated'
+        self.priorities = '#id-priorities'
 
     def fill_task(self, task):
         self.set_value(self.title, task.title)
@@ -29,7 +29,7 @@ class CreateTaskPage(PageWithLeaveMessage):
 
     def save_task(self, task):
         self.fill_task(task)
-        self.click('#save_task')
+        self.click('#save-task')
         return self.task_detail_page()
 
     def confirm_canceling(self):
@@ -41,11 +41,11 @@ class CreateTaskPage(PageWithLeaveMessage):
         return self
 
     def reset_task(self):
-        self.click('#reset_fields')
+        self.click('#reset-fields')
         return self
 
     def click_on_task_board_link(self):
-        self.click('#home_page')
+        self.click('#home-page')
         return self
 
     def click_on_task_board_link_without_modifying_fields(self):

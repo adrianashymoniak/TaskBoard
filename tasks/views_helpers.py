@@ -3,7 +3,7 @@ from datetime import datetime
 
 class ViewsHelpers:
     @staticmethod
-    def calculation_delta(task):
+    def calculate_remaining_estimation(task):
         if task.time_estimated is None:
             return None
         else:

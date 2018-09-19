@@ -6,59 +6,51 @@
 {% endblock %}
 {% block title %} Task: '{{ task.task_title }}' {% endblock %}
 {% block authorized_user_content %}
-<div class="task">
     {% if task.status == 'New' %}
-        <h2 class="status_new">{{task.status}}</h2>
+        <h2 class="status status-new">{{ task.status }}</h2>
     {% elif task.status == 'In progress' %}
-        <h2 class="status_in_progress">{{task.status}}</h2>
+        <h2 class="status status-in-progress">{{ task.status }}</h2>
     {% else %}
-        <h2 class="status_done">{{task.status}}</h2>
+        <h2 class="status status-done">{{ task.status }}</h2>
     {% endif %}
-    <div id="id_priorities">
+    <div id="id-priorities">
         {% if task.priorities == 'Minor' %}
-            <h2 class="minor">{{task.priorities}}</h2>
+            <h2 class="priority minor">{{ task.priorities }}</h2>
         {% elif task.priorities == 'Normal' %}
-            <h2 class="normal">{{task.priorities}}</h2>
+            <h2 class="priority normal">{{ task.priorities }}</h2>
         {% elif task.priorities == 'Major' %}
-            <h2 class="major">{{task.priorities}}</h2>
+            <h2 class="priority major">{{ task.priorities }}</h2>
         {% else %}
-            <h2 class="critical">{{task.priorities}}</h2>
+            <h2 class="priority critical">{{ task.priorities }}</h2>
         {% endif %}
     </div>
-    <label id="title_task">Task title:</label>
-    <h4 class="task_title" id="task_title_detail"><strong>{{ task.task_title }}</strong> </h4>
-    <hr>
-    <label id="description_task">Description of the task:</label>
-    <div class="task_description" id="task_description">{{ task.task_description }}</div>
-    <hr>
-    <div class="time">
+    <div class="title">
+        <label id="title-task">Task title:</label>
+        <h4 class="task-title" id="task-title-detail"><strong>{{ task.task_title }}</strong></h4>
+    </div>
+    <div class="task-content">
+        <label id="description-task">Description of the task:</label>
+        <div class="task-description" id="task-description">{{ task.task_description }}</div>
         {% if task.time_estimated %}
-        <label id="task_estimation">Estimation:</label>
-        <p id="estimated">{{ task.time_estimated|date:'M. d, Y' }}</p>
-        {% endif%}
+            <p><b>Estimation:</b>&ensp;<span id="estimated">{{ task.time_estimated|date:'M. d, Y' }}</span></p>
+        {% endif %}
         {% if task.time_published %}
-        <div class="date">
-            <label id="task_published">Published at:</label>
-            <p id="published_at">{{ task.time_published|date:'M. j, Y, h:i A' }}</p>
-        </div>
+            <p><b>Published at:</b>&ensp;<span  id="published-at">{{ task.time_published|date:'M. j, Y, h:i A' }}</span></p>
         {% endif %}
         {% if task.time_edited %}
-        <div class="edited_date">
-            <label id="task_edited">Edited at: </label>
-            <p id="edited_at">{{ task.time_edited|date:'M. j, Y, h:i A' }}</p>
-            </div>
+            <p><b>Edited at:</b>&ensp;<span id="edited-at">{{ task.time_edited|date:'M. j, Y, h:i A' }}</span></p>
         {% endif %}
+        <div class="task-estimation-time">
+            {% if task.remaining_estimation > 2 and task.status != 'Done' %}
+                <p class="task-in-time">You have {{ task.remaining_estimation }} day(s) to finish this task in time!</p>
+            {% elif task.remaining_estimation <= 2 and task.remaining_estimation >= 0 and task.status != 'Done' %}
+                <p class="task-near-end-estimation">You have {{ task.remaining_estimation }} day(s) to finish your task in time!</p>
+            {% elif task.remaining_estimation < 0 and task.status != 'Done' %}
+                <p class="task-over-estimation">You are not in time with this task. You have underestimate
+                    by {{ task.remaining_estimation }} day(s)!</p>
+            {% elif task.remaining_estimation is None and task.status != 'Done' %}
+                <p class="task-estimation-none">You didn't set any estimation to this task.</p>
+            {% endif %}
+        </div>
     </div>
-    <br />
-    {% if task.delta > 2 and task.status != 'Done' %}
-        <p class="task_in_time">You have {{ task.delta }} day(s) to finish this task in time!</p>
-    {% elif task.delta <= 2 and task.delta >= 0 and task.status != 'Done' %}
-        <p class="task_near_end_estimation">You have {{ task.delta }} day(s) to finish your task in time!</p>
-    {% elif task.delta < 0 and task.status != 'Done' %}
-        <p class="task_over_estimation">You are not in time with this task. You have  underestimate by {{ task.delta }} day(s)!</p>
-    {% elif task.delta is None and task.status != 'Done' %}
-        <p class="task_estimation_none">You didn't set any estimation to this task.</p>
-    {% endif %}
-
-</div>
 {% endblock %}

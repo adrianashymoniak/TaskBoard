@@ -2,11 +2,11 @@ var isSubmitButtonClicked = false;
 
 var isSomethingChanged = false;
 
-$("#submit_btn").click(function () {
+$("[type='submit']").click(function () {
     isSubmitButtonClicked = true;
 });
 
-$("[name='change_password_from']").change(function () {
+$("[name='form']").change(function () {
     isSomethingChanged = true;
 });
 

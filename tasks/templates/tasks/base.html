@@ -8,40 +8,39 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    {% block styles %}
-    {% endblock %}
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/delete_task.js' %}"></script>
+    {% block styles %}{% endblock %}
 </head>
 <body>
 <header>
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a id="home_page" class="navbar-brand" href="{% url 'home' %}">Tasks Board</a>
+                <a id="home-page" class="navbar-brand" href="{% url 'home' %}">Tasks Board</a>
             </div>
             {% if user.is_authenticated %}
                 <ul class="nav navbar-nav">
-                    <li><a id="create_task" href="{% url 'create_task' %}">Create Task</a></li>
-                    <li><a id="delete_all_tasks" href="{% url 'delete_all_tasks' %}"
-                           onclick="return confirm('Are you sure you want to delete all tasks?');">Delete All Tasks</a>
+                    <li><a id="create-task" href="{% url 'create_task' %}">Create Task</a></li>
+                    <li><a id="delete-all-tasks" href="{% url 'delete_all_tasks' %}" class="task-delete"
+                           onclick="return getTaskDeleted()">Delete All Tasks</a>
                     </li>
                     {% url 'task_detail' pk=task.pk as task_detail_url %}
-                    {% if request.get_full_path == task_detail_url %}
-                        <li><a id="delete_task_edit_page" href="{% url 'delete' pk=task.pk %}"
-                               onclick="return confirm('Are you sure you want to delete this task?');">Delete task</a>
-                        </li>
-                        <li><a id="edit_task_task_detail" href="{% url 'edit_task' pk=task.pk %}">Edit task</a></li>
-                    {% endif %}
                     {% url 'edit_task' pk=task.pk as edit_task_url %}
-                    {% if request.get_full_path == edit_task_url %}
-                        <li><a id="delete_task_edit_page" href="{% url 'delete' pk=task.pk %}"
-                               onclick="return confirm('Are you sure you want to delete this task?');">Delete task</a>
+                    {% if request.get_full_path == task_detail_url or request.get_full_path == edit_task_url %}
+                        <li><a id="delete-task-edit-page" href="{% url 'delete' pk=task.pk %}" class="task-delete"
+                               onclick="return getTaskDeleted()">Delete task</a>
                         </li>
-                        <li><a id="go_detail_page" href="{% url 'task_detail' pk=task.pk %}">Task Detail</a></li>
+                        {% if  request.get_full_path == task_detail_url %}
+                            <li><a id="edit-task-task-detail" href="{% url 'edit_task' pk=task.pk %}">Edit task</a></li>
+                        {% elif request.get_full_path == edit_task_url %}
+                            <li><a id="go-detail-page" href="{% url 'task_detail' pk=task.pk %}">Task Detail</a></li>
+                        {% endif %}
                     {% endif %}
                     {% url 'view_profile' as view_profile_url %}
                     {% if request.get_full_path == view_profile_url %}
-                        <li><a id="delete_user" href="{% url 'delete_account' %}"
-                               onclick="return confirm('Are you sure you want to delete your account? Please, be aware that all your tasks also would be deleted!');">Delete
+                        <li><a id="delete-user" href="{% url 'delete_account' %}"
+                               onclick="return getAccountDeleted()">Delete
                             account</a>
                         </li>
                     {% endif %}
@@ -52,10 +51,10 @@
                             <button id="greeting" class="dropbtn">Hello {{ user.username }} <span
                                     class="arrow">&#9660;</span></button>
                             <div class="dropdown-content">
-                                <a id="id_view_profile" href="{% url 'view_profile' %}">Profile</a>
-                                <a id="id_edit_profile" href="{% url 'edit_profile' %}">Edit profile</a>
-                                <a id="id_change_password" href="{% url 'change_password' %}">Change password</a>
-                                {% if request.user.is_staff %}
+                                <a id="id-view-profile" href="{% url 'view_profile' %}">Profile</a>
+                                <a id="id-edit-profile" href="{% url 'edit_profile' %}">Edit profile</a>
+                                <a id="id-change-password" href="{% url 'change_password' %}">Change password</a>
+                                {% if user.is_staff %}
                                     <a href="{% url 'admin:index' %}">Admin site</a>
                                 {% endif %}
                             </div>
@@ -84,9 +83,8 @@
     {% block authorized_user_content %}
     {% endblock %}
 {% endif %}
-
-</body>
 <div class="footer">
-    Tasks board application
+    &#9400 {% now "Y" %} Tasks board application
 </div>
+</body>
 </html>

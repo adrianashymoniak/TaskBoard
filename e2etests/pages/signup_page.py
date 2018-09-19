@@ -12,5 +12,5 @@ class SignUpPage(BasePage):
         self.set_value('#email', user.email)
         self.set_value('#password1', user.password)
         self.set_value('#password2', user.password_confirm)
-        self.click('#signup_btn')
+        self.click('#signup-btn')
         return self.home_page()

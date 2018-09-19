@@ -3,11 +3,11 @@ from e2etests.pages.base_page import BasePage
 
 class PageWithLeaveMessage(BasePage):
     def navigate_to_task_detail_page_with_message(self):
-        self.click('#go_detail_page')
+        self.click('#go-detail-page')
         return self
 
     def navigate_to_task_detail_page_without_message(self):
-        self.click('#go_detail_page')
+        self.click('#go-detail-page')
         return self.task_detail_page()
 
     def discard_leaving(self):
@@ -23,5 +23,5 @@ class PageWithLeaveMessage(BasePage):
         return self.home_page()
 
     def navigate_to_home_page(self):
-        self.click('#home_page')
+        self.click('#home-page')
         return self

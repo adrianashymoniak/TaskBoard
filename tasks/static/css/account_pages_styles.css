@@ -1,16 +1,15 @@
-
+/*used for centralized input fields and labels in login, signup, change password, edit profile anf password reset pages*/
 .alignment {
     display: block;
     margin: auto;
     width: 250px;
 }
 
-input {
+.alignment input {
     margin-bottom: 20px;
-
 }
 
-h2.form_title {
+.form-title {
     text-align: center;
 }
 
@@ -24,3 +23,10 @@ button.btn.btn-primary {
     padding-top: 20px;
 }
 
+.profile {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 30px;
+    text-align: justify;
+}

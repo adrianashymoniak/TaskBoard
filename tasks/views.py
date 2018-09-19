@@ -30,7 +30,7 @@ def home(request):
     user = request.user
     tasks = Task.objects.filter(user=user).order_by('time_published')
     for task in tasks:
-        task.delta = ViewsHelpers.calculation_delta(task)
+        task.remaining_estimation = ViewsHelpers.calculate_remaining_estimation(task)
     return render(request, 'tasks/home_page.html', {'tasks': tasks})
 
 
@@ -57,7 +57,7 @@ def create_task(request):
 @login_required
 def task_detail(request, pk):
     task = get_object_or_404(Task, pk=pk)
-    task.delta = ViewsHelpers.calculation_delta(task)
+    task.remaining_estimation = ViewsHelpers.calculate_remaining_estimation(task)
     return render(request, 'tasks/task_detail.html', {'task': task})
 
 
@@ -97,19 +97,16 @@ def delete_all_tasks(request):
 
 
 def error_404(request, exception):
-    data = {}
-    return render(request, 'tasks/errors/404.html', data)
+    return render(request, 'tasks/errors/404.html', {})
 
 
 def error_500(request):
-    data = {}
-    return render(request, 'tasks/errors/500.html', data)
+    return render(request, 'tasks/errors/500.html', {})
 
 
 @login_required
 def view_profile(request):
-    args = {'user': request.user}
-    return render(request, 'tasks/profile.html', args)
+    return render(request, 'tasks/profile.html', {'user': request.user})
 
 
 @login_required

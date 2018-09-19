@@ -7,8 +7,8 @@
 {% block title %}Home page{% endblock %}
 {% block authorized_user_content %}
     <div class="column">
-        <h2 class="column_name_new">New</h2>
-        <div class="task_column">
+        <h2 class="column-name column-name-new">New</h2>
+        <div class="task-column">
             {% for task in tasks %}
                 {% if task.status == 'New' %}
                     {% include 'tasks/templates_helpers/home_page_estimation_colors.html' %}
@@ -17,8 +17,8 @@
         </div>
     </div>
     <div class="column">
-        <h2 class="column_name_in_progress">In progress</h2>
-        <div class="task_column">
+        <h2 class="column-name column-name-in-progress">In progress</h2>
+        <div class="task-column">
             {% for task in tasks %}
                 {% if task.status == 'In progress' %}
                     {% include 'tasks/templates_helpers/home_page_estimation_colors.html' %}
@@ -27,8 +27,8 @@
         </div>
     </div>
     <div class="column">
-        <h2 class="column_name_done">Done</h2>
-        <div class="task_column">
+        <h2 class="column-name column-name-done">Done</h2>
+        <div class="task-column">
             {% for task in tasks %}
                 {% if task.status == 'Done' %}
                     {% include 'tasks/templates_helpers/home_page_estimation_colors.html' %}

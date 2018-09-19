@@ -1,30 +1,22 @@
 {% extends 'tasks/base.html' %}
 {% block styles %}
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/task_detail.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/account_pages_styles.css' %}"/>
 {% endblock %}
 {% block title %}Profile: {{ user.username }}{% endblock %}
 {% block authorized_user_content %}
     <form method='post'>
         {% csrf_token %}
         <div class="profile">
-            <label>Username:</label>
-            <p id="username"> {{ user.username }}</p>
-            <hr>
+            <p><b>Username:</b>&ensp;<span id="username">{{ user.username }}</span></p>
             {% if user.first_name != '' %}
-                <label>First name:</label>
-                <p id="first_name">{{ user.first_name }}</p>
-                <hr>
+                <p><b>First name:</b>&ensp;<span id="first-name">{{ user.first_name }}</span></p>
             {% endif %}
             {% if user.last_name != '' %}
-                <label>Last name:</label>
-                <p id="last_name">{{ user.last_name }}</p>
-                <hr>
+                <p><b>Last name:</b>&ensp;<span id="last-name">{{ user.last_name }}</span></p>
             {% endif %}
             {% if user.email != '' %}
-                <label>Email:</label>
-                <p id="email">{{ user.email }}</p>
-                <hr>
+                <p><b>Email:</b>&ensp;<span id="email">{{ user.email }}</span></p>
             {% endif %}
         </div>
     </form>

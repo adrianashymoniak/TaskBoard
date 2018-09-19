@@ -5,8 +5,8 @@ from e2etests.pages.delete_user_account_page import DeleteUserAccountPage
 class ViewProfilePage(DeleteUserAccountPage):
     def read_profile_information(self):
         username = self.read_user_name()
-        first_name = self.read_text('#first_name')
-        last_name = self.read_text('#last_name')
+        first_name = self.read_text('#first-name')
+        last_name = self.read_text('#last-name')
         email = self.read_text('#email')
         user = User(username=username, first_name=first_name, last_name=last_name, email=email)
         return user

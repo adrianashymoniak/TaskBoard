@@ -6,14 +6,14 @@
 {% endblock %}
 {% block title %}You are creating task {% endblock %}
 {% block authorized_user_content %}
-    <form method="post" name="create_form">
+    <form method="post" name="form">
         {% csrf_token %}
-        {% include 'tasks/templates_helpers/tasks_fields.html' %}
-        <div class="form-group-buttons">
-            <button id="save_task" type="submit" class="btn btn-primary">Save</button>
-            <a id="reset_fields" type="reset" class="btn btn-primary" href="{% url 'create_task' %}">Reset</a>
+        <div class="task-fields">
+            {% include 'tasks/templates_helpers/tasks_fields.html' %}
+                <button id="save-task" type="submit" class="btn btn-primary">Save</button>
+                <a id="reset-fields" type="reset" class="btn btn-primary" href="{% url 'create_task' %}">Reset</a>
         </div>
         {% include 'tasks/templates_helpers/error_messages.html' %}
     </form>
-    <script src="{% static 'js/create_task_warning.js' %}"></script>
+    <script src="{% static 'js/warning_message_on_leave.js' %}"></script>
 {% endblock %}

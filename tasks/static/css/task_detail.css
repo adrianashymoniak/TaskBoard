@@ -1,87 +1,67 @@
-.minor {
+.priority {
     display: inline-block;
     margin-left: 30px;
     margin-right: auto;
     width: 180px;
     text-align: center;
-    background: #969696;
     color: #ffffff;
+}
+
+.minor {
+    background: #969696;
 }
 
 .normal {
-    display: inline-block;
-    margin-left: 30px;
-    margin-right: auto;
-    width: 180px;
-    text-align: center;
     background: #6d6fa5;
-    color: #ffffff;
 }
 
 .major {
-    display: inline-block;
-    margin-left: 30px;
-    margin-right: auto;
-    width: 180px;
-    text-align: center;
     background: #964646;
-    color: #ffffff;
 }
 
 .critical {
-    display: inline-block;
-    margin-left: 30px;
-    margin-right: auto;
-    width: 180px;
-    text-align: center;
     background: #8e0000;
-    color: #ffffff;
 }
 
-.task_title {
+.title {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 35px;
+    padding-left: 30px;
+    text-align: justify;
+}
+
+.task-title {
     display: block;
     float: none;
-    margin-left: 30px;
     color: #337ab7;
 }
 
-
-.task_description, .time, #description_task, #title_task, #estimated, #published_at, #edited_at, .profile {
+.task-content *:not(b):not(.task-estimation-time ) {
     display: block;
     margin-top: 10px;
     margin-bottom: 10px;
     padding-left: 30px;
+    padding-right: 10px;
     text-align: justify;
-
 }
 
-.task_description, .task_title {
-    margin-left: 30px;
-    padding-left: 30px;
-}
-
-.time {
-    display: block;
-    margin-top: 50px;
-    padding-top: 10px;
-}
-
-.task_in_time {
-    margin-left: 30px;
+.task-in-time {
     color: green;
 }
 
-.task_near_end_estimation {
-    margin-left: 30px;
+.task-near-end-estimation {
     color: orange;
 }
 
-.task_over_estimation {
-    margin-left: 30px;
+.task-over-estimation {
     color: red;
 }
 
-.task_estimation_none {
-    margin-left: 30px;
+.task-estimation-none {
     color: grey;
+}
+
+.task-estimation-time {
+    margin-bottom: 50px;
 }

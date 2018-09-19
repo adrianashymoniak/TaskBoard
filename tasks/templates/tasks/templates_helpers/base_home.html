@@ -1,14 +1,14 @@
 {% if task.priorities == 'Minor' %}
-    <img src="/static/images/minor.png" class="home_page_images">
+    <img src="/static/images/minor.png" class="home-page-images">
     <span>#{{ task.pk }}: {{ task.task_title }}</span>
 {% elif task.priorities == 'Normal' %}
-    <img src="/static/images/normal.png" class="home_page_images">
+    <img src="/static/images/normal.png" class="home-page-images">
     <span>#{{ task.pk }}: {{ task.task_title }}</span>
 {% elif task.priorities == 'Major' %}
-    <img src="/static/images/major.png" class="home_page_images">
+    <img src="/static/images/major.png" class="home-page-images">
     <span>#{{ task.pk }}: {{ task.task_title }}</span>
 {% else %}
-    <img src="/static/images/critical.png" class="home_page_images">
+    <img src="/static/images/critical.png" class="home-page-images">
     <span>#{{ task.pk }}: {{ task.task_title }}</span>
 {% endif %}
 

@@ -6,21 +6,21 @@
 {% endblock %}
 {% block title %}Edit profile information for "{{ user.username }}" account {% endblock %}
 {% block authorized_user_content %}
-    <form method='post' name="edit_profile_form">
+    <form method='post' name="form">
         {% csrf_token %}
         <div class="alignment">
-            <input class="form-control" id="id_username" type="text" name="username" maxlength="30"
+            <input class="form-control" id="id-username" type="text" name="username" maxlength="30"
                    placeholder="Username" value="{{ user.username }}" readonly>
-            <input class="form-control" id="id_first_name" type="text" name="first_name" maxlength="30"
+            <input class="form-control" id="id-first-name" type="text" name="first_name" maxlength="30"
                    placeholder="First Name" value="{{ user.first_name }}">
-            <input class="form-control" id="id_last_name" type="text" name="last_name" maxlength="30"
+            <input class="form-control" id="id-last-name" type="text" name="last_name" maxlength="30"
                    placeholder="Last Name" value="{{ user.last_name }}">
-            <input class="form-control" id="id_email" type="email" name="email" maxlength="254" placeholder="Email"
+            <input class="form-control" id="id-email" type="email" name="email" maxlength="254" placeholder="Email"
                    value="{{ user.email }}">
-            <button class="btn btn-primary" id="submit_btn" type="submit">Submit</button>
+            <button class="btn btn-primary" id="submit-btn" type="submit">Submit</button>
         </div>
         {% include 'tasks/templates_helpers/error_messages.html' %}
     </form>
-    <script src="{% static 'js/edit_profile_warning.js' %}"></script>
+    <script src="{% static 'js/warning_message_on_leave.js' %}"></script>
 {% endblock %}
 

@@ -11,5 +11,5 @@ class ConfirmTaskDeletingPage(BasePage):
         return self
 
     def click_delete_all(self):
-        self.click('#delete_all_tasks')
+        self.click('#delete-all-tasks')
         return self

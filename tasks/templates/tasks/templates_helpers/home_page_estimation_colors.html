@@ -1,18 +1,18 @@
 {% if task.status != 'Done' %}
-    {% if task.delta > 2 %}
-        <h4><a id="task_title" class="task_in_time"
+    {% if task.remaining_estimation > 2 %}
+        <h4><a id="task-title" class="task-estimation task-in-time"
                href="{% url 'task_detail' pk=task.pk %}">{% include 'tasks/templates_helpers/base_home.html' %}</a></h4>
-    {% elif task.delta <= 2 and task.delta >= 0 %}
-        <h4><a id="task_title" class="task_near_end_estimation"
+    {% elif task.remaining_estimation <= 2 and task.remaining_estimation >= 0 %}
+        <h4><a id="task-title" class="task-estimation task-near-end-estimation"
                href="{% url 'task_detail' pk=task.pk %}">{% include 'tasks/templates_helpers/base_home.html' %}</a></h4>
-    {% elif task.delta < 0 %}
-        <h4><a id="task_title" class="task_over_estimation"
+    {% elif task.remaining_estimation < 0 %}
+        <h4><a id="task-title" class="task-estimation task-over-estimation"
                href="{% url 'task_detail' pk=task.pk %}">{% include 'tasks/templates_helpers/base_home.html' %}</a></h4>
-    {% elif task.delta is None %}
-        <h4><a id="task_title" class="task_estimation_none"
+    {% elif task.remaining_estimation is None %}
+        <h4><a id="task-title" class="task-estimation task-estimation-none"
                href="{% url 'task_detail' pk=task.pk %}">{% include 'tasks/templates_helpers/base_home.html' %}</a></h4>
     {% endif %}
 {% else %}
-    <h4><a id="task_title"
+    <h4><a id="task-title"
            href="{% url 'task_detail' pk=task.pk %}">{% include 'tasks/templates_helpers/base_home.html' %}</a></h4>
 {% endif %}
