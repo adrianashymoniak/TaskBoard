@@ -7,11 +7,12 @@ pipelines:
     - step:
         name: Deploy to Heroku test server
         script:
-          - git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$STG_HEROKU_APP_NAME.git HEAD
+          - git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$STG_HEROKU_APP_NAME.git HEAD:master
 
     - step:
         name: Static Code Analysis
         script:
+          - pip install -r requirements.txt
           - pylint --load-plugins pylint_django [..other options..] tasks --disable=missing-docstring
           - pylint --load-plugins pylint_django [..other options..] e2etests --disable=missing-docstring
 
@@ -29,4 +30,4 @@ pipelines:
     - step:
         name: Deploy to Heroku production server
         script:
-          - git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$PRODUCTION_HEROKU_APP_NAME.git HEAD
+          - git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$PRODUCTION_HEROKU_APP_NAME.git HEAD:master
