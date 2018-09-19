@@ -13,8 +13,8 @@ pipelines:
         name: Static Code Analysis
         script:
           - pip install -r requirements.txt
-          - pylint --load-plugins pylint_django [..other options..] tasks --disable=missing-docstring
-          - pylint --load-plugins pylint_django [..other options..] e2etests --disable=missing-docstring
+          - pylint --load-plugins pylint_django [..other options..] tasks --disable=missing-docstring,F0001,R1705,C0103,C0301
+          - pylint --load-plugins pylint_django [..other options..] e2etests --disable=missing-docstring,F0001,R1705,C0103,C0301
 
     - step:
         name: Run tests against test server
