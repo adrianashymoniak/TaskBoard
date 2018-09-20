@@ -20,6 +20,13 @@
     * run: **psql**
     * CREATE USER **set_user_name_here** WITH PASSWORD '**set_password_here**';
     * CREATE DATABASE task_board_db;
+    
+* For setting correct db time zone go to terminal and run:
+    * **sudo -u postgres psql**
+    * **\c task_board_db;**
+    * **DATABASE task_board_db SET timezone TO 'UTC';**
+    * **SELECT pg_reload_conf();**
+    
 * Edit DEBUG parameter in task_board_application/settings/local.py:
     * DEBUG = False   
 * Edit task_board_application/settings/local.py with updating the following **DATABASES** params:

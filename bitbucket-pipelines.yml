@@ -10,13 +10,6 @@ pipelines:
           - git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$STG_HEROKU_APP_NAME.git HEAD:master
 
     - step:
-        name: Static Code Analysis
-        script:
-          - pip install -r requirements.txt
-          - pylint --load-plugins pylint_django [..other options..] tasks --disable=missing-docstring,F0001,R1705,C0103,C0301
-          - pylint --load-plugins pylint_django [..other options..] e2etests --disable=missing-docstring,F0001,R1705,C0103,C0301
-
-    - step:
         name: Run tests against test server
         image: adrianashymoniak/python.3.6-selenium-chrome:3.6
         caches:
