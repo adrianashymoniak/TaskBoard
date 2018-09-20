@@ -1,11 +1,9 @@
 <label for="id-priorities">Priority</label>
 <select name="priorities" id="id-priorities" class="form-control">
-    <option value="Normal" {% if task.priorities == "Normal" %}selected="selected"{% endif %}>Normal
-    </option>
+    <option value="Normal" {% if task.priorities == "Normal" %}selected="selected"{% endif %}>Normal</option>
     <option value="Minor" {% if task.priorities == "Minor" %}selected="selected"{% endif %}>Minor</option>
     <option value="Major" {% if task.priorities == "Major" %}selected="selected"{% endif %}>Major</option>
-    <option value="Critical" {% if task.priorities == "Critical" %}selected="selected"{% endif %}>Critical
-    </option>
+    <option value="Critical" {% if task.priorities == "Critical" %}selected="selected"{% endif %}>Critical</option>
 </select>
 <label for="task-title">Task title</label>
 <input class="form-control" id="task-title" type="text" name="task_title" maxlength="150"
