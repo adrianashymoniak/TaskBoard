@@ -1,10 +1,10 @@
-#####Required:
+##### Required:
 * python3.6
 * django 2.0
-#####Optional:
+##### Optional:
 * virtual env
 
-#####Installation process:
+##### Installation process:
 * Clone repository: **git clone https://adrianashymoniak@bitbucket.org/adrianashymoniak/tasks-board.git**
 * Create virtual env:  run command in terminal **python -m venv myvenv**
 * Activate virtual env (optional): 
@@ -45,7 +45,7 @@
 * Run server locally: **python manage.py runserver --settings=task_board_application.settings.local**
 * Open browser and go to  **http://127.0.0.1:8000/** -> click signup and create your own user
  
-#####End to end tests
+##### End to end tests
 * Run tests with **python -m unittest discover e2etests -v** (chrome should be installed)
 * Edit tasks-board/e2etests/configs.py with following parameters:
     * BASE_URL = 'http://127.0.0.1:8000'
